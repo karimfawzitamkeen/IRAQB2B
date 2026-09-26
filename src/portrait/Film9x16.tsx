@@ -6,7 +6,7 @@ import {C, ramp} from '../theme';
 import {Background, Finish} from '../components/Background';
 import {Globe} from '../components/Globe';
 import {DocJourney} from './DocJourney';
-import {PH, PW, SAFE, portraitGlobe} from './layout';
+import {PDUR, PH, PW, SAFE, portraitGlobe} from './layout';
 import {P1World} from './scenes/P1World';
 import {P2Submission} from './scenes/P2Submission';
 import {P3Verifier} from './scenes/P3Verifier';
@@ -32,7 +32,7 @@ export const Film9x16: React.FC<{guides?: boolean}> = ({guides = false}) => {
 	}, [handle]);
 
 	const fadeIn = ramp(frame, 0, 10);
-	const fadeOut = ramp(frame, 741, 749, 0, 1, (t) => t * t);
+	const fadeOut = ramp(frame, PDUR - 9, PDUR - 1, 0, 1, (t) => t * t);
 
 	return (
 		<AbsoluteFill style={{background: C.black, overflow: 'hidden'}}>

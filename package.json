@@ -5,7 +5,7 @@
   "description": "Digital Certificate of Origin Attestation \u2014 25s motion graphics film (Remotion)",
   "scripts": {
     "studio": "remotion studio",
-    "render": "remotion render CertificateOfOrigin9x16 out/certificate-of-origin-9x16.mp4 --image-format=png",
+    "render": "remotion render CertificateOfOrigin9x16 out/certificate-of-origin-9x16-screen.mp4 --image-format=png",
     "render:16x9": "remotion render CertificateOfOrigin out/certificate-of-origin.mp4",
     "typecheck": "tsc -p ."
   },

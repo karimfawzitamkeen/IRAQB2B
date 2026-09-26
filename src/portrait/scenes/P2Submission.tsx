@@ -7,8 +7,8 @@ import {CX, SAFE} from '../layout';
 import {Packet, PChapter, PortalStation, TraderEmblem} from '../ui';
 
 /** Scene 2 — Trader submission + digital service fee (90–180f). Platform top · flight mid · trader bottom. */
-const PORTAL: [number, number] = [CX, 770];
-const TRADER: [number, number] = [CX, 1300];
+const PORTAL: [number, number] = [CX, 830];
+const TRADER: [number, number] = [CX, 1370];
 
 const CARDS = [
 	{title: 'Certificate of Origin', variant: 'coo' as const, born: 92, launch: 100, dur: 30, lane: 372},
@@ -19,10 +19,10 @@ const CARD_S = 0.42;
 
 const cubic = (t: number): [number, number] => {
 	// conduit: gentle S from the trader up to the portal
-	const p0 = [CX, 1170];
-	const p1 = [CX + 110, 1080];
-	const p2 = [CX - 110, 990];
-	const p3 = [CX, 900];
+	const p0 = [CX, 1240];
+	const p1 = [CX + 110, 1150];
+	const p2 = [CX - 110, 1060];
+	const p3 = [CX, 960];
 	const u = 1 - t;
 	const a = u * u * u;
 	const b = 3 * u * u * t;
@@ -33,7 +33,7 @@ const cubic = (t: number): [number, number] => {
 
 const cardPos = (f: number, c: (typeof CARDS)[number]) => {
 	const t = ramp(f, c.launch, c.launch + c.dur, 0, 1, expoInOut);
-	const [x, y] = qbez([c.lane, 1160], [c.lane, 880], PORTAL, t);
+	const [x, y] = qbez([c.lane, 1230], [c.lane, 940], PORTAL, t);
 	return {x, y, t};
 };
 
@@ -77,7 +77,7 @@ export const P2Submission: React.FC<{frame: number}> = ({frame: f}) => {
 				filter: push > 0 ? `blur(${push * 14}px)` : undefined,
 			}}
 		>
-			<PChapter frame={f} start={94} end={170} index="01" title="Submission" sub="The trader submits the documents digitally." />
+			<PChapter frame={f} start={94} end={170} index="01" title="Submission" sub="Documents submitted digitally." />
 
 			{/* conduit + upward data motes */}
 			<svg width={1080} height={1920} style={{position: 'absolute', inset: 0}}>
@@ -92,22 +92,22 @@ export const P2Submission: React.FC<{frame: number}> = ({frame: f}) => {
 
 			<PortalStation x={PORTAL[0]} y={PORTAL[1]} f={f} enter={ramp(f, 92, 124)} pulses={pulses} />
 			{/* platform label, instrument-style at the side */}
-			<div style={{position: 'absolute', left: 700, top: 736, opacity: ramp(f, 104, 122), display: 'flex', alignItems: 'center', gap: 12}}>
+			<div style={{position: 'absolute', left: 700, top: 782, opacity: ramp(f, 104, 122), display: 'flex', alignItems: 'center', gap: 12}}>
 				<div style={{width: 18 * ramp(f, 104, 122), height: 1, background: C.cyan}} />
 				<div>
-					<Label size={20} spacing={2} color={C.white}>
+					<Label size={34} spacing={2} color={C.white}>
 						Attestation
 					</Label>
-					<Label size={20} spacing={2} color={C.white} style={{marginTop: 6}}>
+					<Label size={34} spacing={2} color={C.white} style={{marginTop: 8}}>
 						Platform
 					</Label>
 				</div>
 			</div>
 
 			<TraderEmblem x={TRADER[0]} y={TRADER[1]} f={f} enter={ramp(f, 86, 112)} pulse={traderPulse} />
-			<div style={{position: 'absolute', top: 1446, left: 0, right: 0, textAlign: 'center', opacity: ramp(f, 96, 114)}}>
-				<Label size={20} spacing={4} color={C.white}>
-					Trader · Registered Exporter
+			<div style={{position: 'absolute', top: 1540, left: 0, right: 0, textAlign: 'center', opacity: ramp(f, 96, 114)}}>
+				<Label size={38} spacing={4} color={C.white}>
+					Trader
 				</Label>
 			</div>
 
@@ -148,19 +148,20 @@ export const P2Submission: React.FC<{frame: number}> = ({frame: f}) => {
 						<div
 							style={{
 								position: 'absolute',
-								left: p.x - 135,
-								top: p.y - (DOC_H * s) / 2 - 64,
-								width: 270,
+								left: p.x - 210,
+								top: p.y - (DOC_H * s) / 2 - 92,
+								width: 420,
+								textAlign: 'center',
 								opacity: born * (1 - ramp(p.t, 0.45, 0.7)),
 							}}
 						>
-							<Label size={18} spacing={2} color={C.white}>
+							<Label size={28} spacing={1} color={C.white}>
 								{c.title}
 							</Label>
-							<div style={{height: 2, background: 'rgba(255,255,255,0.14)', marginTop: 8}}>
-								<div style={{height: 2, width: `${p.t * 100}%`, background: C.cyan, boxShadow: `0 0 10px ${C.cyan}`}} />
+							<div style={{height: 3, background: 'rgba(255,255,255,0.14)', marginTop: 10}}>
+								<div style={{height: 3, width: `${p.t * 100}%`, background: C.cyan, boxShadow: `0 0 10px ${C.cyan}`}} />
 							</div>
-							<Label size={16} spacing={2} color={C.cyan} style={{marginTop: 6}}>
+							<Label size={26} spacing={2} color={C.cyan} style={{marginTop: 8}}>
 								Uploading · {Math.round(p.t * 100)}%
 							</Label>
 						</div>
@@ -175,22 +176,22 @@ export const P2Submission: React.FC<{frame: number}> = ({frame: f}) => {
 				</svg>
 			) : null}
 			{fee.t > 0 && fee.t < 0.85 ? (
-				<div style={{position: 'absolute', left: fee.x + 34, top: fee.y - 16, opacity: ramp(fee.t, 0, 0.15) * (1 - ramp(fee.t, 0.6, 0.85))}}>
-					<Label size={18} spacing={3} color={C.cyan}>
+				<div style={{position: 'absolute', left: fee.x + 40, top: fee.y - 22, opacity: ramp(fee.t, 0, 0.15) * (1 - ramp(fee.t, 0.6, 0.85))}}>
+					<Label size={32} spacing={2} color={C.cyan}>
 						Service fee
 					</Label>
 				</div>
 			) : null}
 
 			{/* receipt ledger above the portal */}
-			<div style={{position: 'absolute', left: SAFE.left, top: 414, width: SAFE.right - SAFE.left}}>
+			<div style={{position: 'absolute', left: SAFE.left, top: 350, width: SAFE.right - SAFE.left}}>
 				{LEDGER.map((l, i) => {
 					const a = ramp(f, l.at, l.at + 14);
 					return (
-						<div key={i} style={{display: 'flex', alignItems: 'center', gap: 18, height: 50, opacity: a, transform: `translateY(${(1 - a) * 12}px)`, borderBottom: '1px solid rgba(244,247,251,0.08)'}}>
-							<Check p={ramp(f, l.at + 2, l.at + 18, 0, 1, (t) => t)} frame={f} size={30} color={l.color} />
-							<div style={{fontFamily: F.sans, fontSize: 28, fontWeight: 400, color: C.white}}>{l.title}</div>
-							<Label size={20} spacing={4} color={l.color} style={{marginLeft: 'auto'}}>
+						<div key={i} style={{display: 'flex', alignItems: 'center', gap: 22, height: 80, opacity: a, transform: `translateY(${(1 - a) * 12}px)`, borderBottom: '1px solid rgba(244,247,251,0.08)'}}>
+							<Check p={ramp(f, l.at + 2, l.at + 18, 0, 1, (t) => t)} frame={f} size={50} color={l.color} stroke={2.2} />
+							<div style={{fontFamily: F.sans, fontSize: 44, fontWeight: 400, color: C.white}}>{l.title}</div>
+							<Label size={32} spacing={2} color={l.color} style={{marginLeft: 'auto'}}>
 								{l.status}
 							</Label>
 						</div>

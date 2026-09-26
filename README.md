@@ -5,7 +5,8 @@ A 25-second motion-graphics film built entirely with code in
 no image assets: the globe (real coastlines from `world-atlas`), the documents, the seals,
 the QR code and the particles are all generated programmatically.
 
-- **Portrait social master (9:16, 1080×1920, 30 fps):** [`out/certificate-of-origin-9x16.mp4`](out/certificate-of-origin-9x16.mp4)
+- **Portrait display-screen master (9:16, 1080×1920, 30 fps, 30 s, text sized for 4 m):** [`out/certificate-of-origin-9x16-screen.mp4`](out/certificate-of-origin-9x16-screen.mp4)
+- **Portrait social version (9:16, 25 s):** [`out/certificate-of-origin-9x16.mp4`](out/certificate-of-origin-9x16.mp4), the earlier small-type version
 - **Original landscape version (16:9, 1920×1080):** [`out/certificate-of-origin.mp4`](out/certificate-of-origin.mp4), which predates the approved workflow order
 - **Storyboard, workflow, safe areas, animation language and typography:** [`STORYBOARD.md`](STORYBOARD.md)
 
@@ -14,7 +15,7 @@ the QR code and the particles are all generated programmatically.
 ```bash
 npm install
 npm run studio          # interactive preview (both compositions)
-npm run render          # 9:16 → out/certificate-of-origin-9x16.mp4
+npm run render          # 9:16 display → out/certificate-of-origin-9x16-screen.mp4
 npm run render:16x9     # 16:9 → out/certificate-of-origin.mp4
 npm run typecheck
 ```
@@ -30,7 +31,7 @@ REMOTION_CHROME=/path/to/headless_shell npm run render
 | Path | Role |
 |------|------|
 | `src/portrait/Film9x16.tsx` | **9:16 master timeline**: background, globe, the certificate's continuous journey, eight scenes, lens finish |
-| `src/portrait/layout.ts` | Portrait canvas, critical safe zone (x 100–900, y 250–1500), scene windows, portrait globe camera path |
+| `src/portrait/layout.ts` | Portrait canvas, display-screen critical zone (x 80–1000, y 140–1780), 900-frame duration, scene windows, portrait globe camera path |
 | `src/portrait/DocJourney.tsx` | The single hero certificate from Attaché review through final reveal (pose, status chips, seal shockwave) |
 | `src/portrait/scenes/P1–P8*.tsx` | One file per portrait storyboard scene |
 | `src/portrait/ui.tsx` | Portrait chapter marker, status chips, Trader / Platform / secure core / Accountant emblems, receipt, packets |

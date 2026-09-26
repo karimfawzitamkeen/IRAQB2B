@@ -93,8 +93,8 @@ export const DocJourney: React.FC<{frame: number}> = ({frame: f}) => {
 			) : null}
 
 			{/* status chips centred on the document's top edge */}
-			<div style={{position: 'absolute', left: 0, right: 0, top: top - 26, display: 'flex', justifyContent: 'center'}}>
-				<div style={{position: 'relative', height: 52}}>
+			<div style={{position: 'absolute', left: 0, right: 0, top: top - 38, display: 'flex', justifyContent: 'center'}}>
+				<div style={{position: 'relative', height: 76}}>
 					{underReview > 0 ? <Chip text="UNDER REVIEW" color={C.white} p={underReview} frame={f} style={{position: 'absolute', left: '50%', transform: `translateX(-50%) scale(${0.85 + 0.15 * underReview})`}} /> : null}
 					{eligible > 0 ? <Chip text="ELIGIBLE FOR ATTESTATION" color={C.gold} p={eligible} frame={f} style={{position: 'absolute', left: '50%', transform: `translateX(-50%) scale(${0.85 + 0.15 * eligible})`}} /> : null}
 					{issued > 0 ? <Chip text="CERTIFICATE ISSUED" color={C.gold} p={issued} frame={f} style={{position: 'absolute', left: '50%', transform: `translateX(-50%) scale(${0.85 + 0.15 * issued})`}} /> : null}

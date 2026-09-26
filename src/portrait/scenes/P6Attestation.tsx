@@ -14,11 +14,11 @@ export const P6Attestation: React.FC<{frame: number}> = ({frame: f}) => {
 	if (f < 412 || f > 522) return null;
 	const crane = ramp(f, 418, 446, 0, 1, expoOut);
 	const out = ramp(f, 502, 518);
-	const m = {x: CX, y: 468, s: 0.55};
+	const m = {x: CX, y: 420, s: 0.55};
 
 	return (
 		<AbsoluteFill style={{opacity: 1 - out}}>
-			<PChapter frame={f} start={428} end={506} index="05" title="Digital Attestation" sub="Signed and sealed by the Commercial Attaché." />
+			<PChapter frame={f} start={428} end={506} index="05" title="Digital Attestation" sub="Signed and sealed by the Attaché." />
 
 			{/* the mission returns at the top (camera cranes up) */}
 			<div
@@ -37,10 +37,11 @@ export const P6Attestation: React.FC<{frame: number}> = ({frame: f}) => {
 			</div>
 
 			{/* statement */}
-			<div style={{position: 'absolute', top: 1290, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-				<Words text="Digitally Attested" frame={f} start={468} stagger={5} dur={22} style={{fontFamily: F.sans, fontWeight: 300, fontSize: 80, color: C.white, letterSpacing: -1, textShadow: '0 4px 30px rgba(2,4,10,0.9)'}} />
-				<div style={{width: 320 * ramp(f, 474, 494, 0, 1, expoOut), height: 1, marginTop: 8, background: `linear-gradient(90deg, rgba(217,180,106,0), ${C.gold}, rgba(217,180,106,0))`}} />
-				<Label size={20} spacing={5} color={C.gold} style={{marginTop: 16, opacity: ramp(f, 478, 490), transform: `translateY(${lerp(8, 0, ramp(f, 478, 490))}px)`}}>
+			<div style={{position: 'absolute', top: 1270, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+				<Words text="Digitally" frame={f} start={466} dur={22} style={{fontFamily: F.sans, fontWeight: 300, fontSize: 118, lineHeight: 0.98, color: C.white, letterSpacing: -2, textShadow: '0 4px 30px rgba(2,4,10,0.9)'}} />
+				<Words text="Attested" frame={f} start={471} dur={22} style={{fontFamily: F.sans, fontWeight: 600, fontSize: 118, lineHeight: 0.98, color: C.gold, letterSpacing: -2, textShadow: '0 4px 30px rgba(2,4,10,0.9)'}} />
+				<div style={{width: 420 * ramp(f, 474, 494, 0, 1, expoOut), height: 2, marginTop: 10, background: `linear-gradient(90deg, rgba(217,180,106,0), ${C.gold}, rgba(217,180,106,0))`}} />
+				<Label size={36} spacing={3} color={C.gold} style={{marginTop: 18, opacity: ramp(f, 478, 490), transform: `translateY(${lerp(8, 0, ramp(f, 478, 490))}px)`}}>
 					Signed · Sealed · Issued
 				</Label>
 			</div>

@@ -1,12 +1,17 @@
-# Digital Certificate of Origin Attestation — 25s Vertical Motion Film
+# Digital Certificate of Origin Attestation — 30s Vertical Motion Film (Display Screen)
 
-**Format: 1080 × 1920 px · PORTRAIT 9:16 · 30 fps · 750 frames (25.0 s)**
-Remotion + React · 100% programmatic graphics · designed natively as a **general-purpose social
-master** (Reels, TikTok, Shorts, Stories, LinkedIn / X / Facebook mobile feeds). It is not a crop
-or rescale of the 16:9 version.
+**Format: 1080 × 1920 px · PORTRAIT 9:16 · 30 fps · 900 frames (30.0 s)**
+Remotion + React · 100% programmatic graphics · designed natively for a **portrait display screen**
+(digital signage / exhibition screen), with all text **readable from 4 m**. It is not a crop or
+rescale of the 16:9 version.
 
-> The existing 16:9 film (`out/certificate-of-origin.mp4`) is kept unchanged until the portrait
-> version has been reviewed and approved.
+> Revision: the film was first built as a 25 s social master. For the display screen, all type
+> was enlarged for 4 m viewing, the safe area was widened (no social-app overlays on a screen), and
+> the TAMKEEN ending was extended to **10 s** with the contact line **"Contact us : 07803158768"**.
+> Scenes 1–7 keep their approved timings.
+
+> Earlier deliverables are kept unchanged: `out/certificate-of-origin.mp4` (16:9) and
+> `out/certificate-of-origin-9x16.mp4` (25 s social version).
 
 ---
 
@@ -45,7 +50,7 @@ Trader Submission (+ digital service fee)
   → Sovereign Fee: instruction → Trader payment → receipt submitted → Accountant confirmation
   → Digital Attestation by the Commercial Attaché   (signature + seal + issuance)
   → Final Attested Certificate
-  → TAMKEEN
+  → TAMKEEN + Contact us : 07803158768
 ```
 
 Rules the film must respect:
@@ -60,34 +65,32 @@ Rules the film must respect:
 
 ---
 
-## 2. Canvas, safe areas and layout grid (1080 × 1920)
+## 2. Canvas, safe areas and viewing distance (1080 × 1920)
+
+**Viewing basis.** Portrait display of about 55" (≈ 1.21 m tall → ≈ 0.63 mm per canvas pixel),
+read from **4 m**. Comfortable reading at 4 m needs a cap height of about 18–20 mm, so:
+- **Essential text ≥ 36 px** (labels, statuses); body lines 44–50 px; statements 118–132 px.
+- One idea per line, short wording; nothing essential is carried only by small on-document text.
 
 ```
  y=0    ┌────────────────────────────────┐
-        │  platform UI overlay            │  0–250    : no text, no key detail
- y=250  ├────────────────────────────────┤
-        │  TOP BAND                       │  250–440  : chapter marker / callouts / instructions
- y=440  ├────────────────────────────────┤
+        │  margin (atmosphere only)       │  0–140
+ y=140  ├────────────────────────────────┤
+        │  TOP BAND  chapter / callouts   │  140–340
         │                                 │
-        │  HERO ZONE                      │  440–1300 : certificate / globe / stations / core
-        │  (optical centre ≈ 880)         │
+        │  HERO ZONE                      │  340–1300 : certificate / globe / stations / core
         │                                 │
- y=1300 ├────────────────────────────────┤
-        │  LOWER BAND                     │  1300–1500: statements, status rails, callouts
- y=1500 ├────────────────────────────────┤
-        │  caption / CTA overlay          │  1500–1920: atmosphere only
+        │  LOWER BAND statements / rails  │  1300–1780
+ y=1780 ├────────────────────────────────┤
+        │  margin (atmosphere only)       │  1780–1920
  y=1920 └────────────────────────────────┘
- x:  0 ─ 100 ═════════ CRITICAL ═════════ 900 ─ 1080
+ x:  0 ─ 80 ══════════ TEXT & KEY INFO ══════════ 1000 ─ 1080
 ```
 
-- **Critical text and information: x 100–900, y 250–1500.** This covers every word, number, status,
-  check mark, QR, serial and the brand lock-up.
-  - Left-aligned blocks start at x 100 and end by x 900 (max 800 px).
-  - Centred blocks sit on the frame centre x 540 and are at most **720 px wide (x 180–900)**,
-    so they stay symmetric and inside the critical zone.
-- **Hero objects** (certificate, stations, core) keep their meaningful detail inside x 100–900. Their
-  glow, edges and shadows may extend to x 60–1020.
-- **Full bleed** (background, globe, particles, light, bokeh) uses the whole 1080 × 1920.
+- **Critical zone: x 80–1000, y 140–1780** (a display screen has no app overlays; the 80 px side
+  and 140 px top/bottom margins protect against bezels and overscan).
+- Centred blocks sit on x 540 and stay ≤ 920 px wide.
+- **Full bleed** (background, globe, particles, light) uses the whole 1080 × 1920.
 
 ---
 
@@ -102,12 +105,15 @@ Rules the film must respect:
 | 5 | Sovereign fee & Accountant confirmation | 11.0–14.0 s | 330–420 | 3.0 s | dim horizon |
 | 6 | Digital attestation (signature & seal) | 14.0–16.5 s | 420–495 | 2.5 s | faint horizon |
 | 7 | Final attested certificate | 16.5–20.0 s | 495–600 | 3.5 s | faint horizon |
-| 8 | TAMKEEN | 20.0–25.0 s | 600–750 | 5.0 s | faint glow |
+| 8 | TAMKEEN + contact | 20.0–30.0 s | 600–900 | **10.0 s** | faint glow |
 
 Frame ranges are the scene's "ownership" window. Visual handoffs overlap by 10–20 frames (§5).
 
-Chapter markers (top band): **01 Submission · 02 Verifier Review · 03 Attaché Review ·
-04 Sovereign Fee · 05 Digital Attestation**. Scenes 1, 7 and 8 have no chapter marker.
+Chapter markers (top band, 38 px mono title + one 46 px line):
+**01 Submission** "Documents submitted digitally." · **02 Verifier Review** "The verifier reviews the
+documents." · **03 Attaché Review** "Reviewed by the Commercial Attaché." · **04 Sovereign Fee**
+"Trader pays · Accountant confirms." · **05 Digital Attestation** "Signed and sealed by the Attaché."
+Scenes 1, 7 and 8 have no chapter marker.
 
 ---
 
@@ -228,21 +234,22 @@ Chapter markers (top band): **01 Submission · 02 Verifier Review · 03 Attaché
   - **Bottom right**: `QR VERIFICATION` / "Scan to verify authenticity"
 - **(→ 8)**: The certificate disintegrates into points of light.
 
-### Scene 8 — TAMKEEN (600–750f · 5.0 s)
-- **598–665f**: About 700 points form a **coherent spiral** around the optical centre and
-  collapse onto a single horizontal gold hairline. Length-clamped streaks give the motion blur.
-- **642–690f**: A **gold hairline** (≈ 640 px, fading ends, small gold diamond at the centre)
-  extends from the centre at y ≈ 900.
-- **652–700f**: **"TAMKEEN"**, centred at y ≈ 800 (Inter SemiBold 120 px, block ≤ 720 px wide).
-  Letters rise from a mask with blur-to-sharp, staggered 3f, and the tracking tightens. A soft
-  gleam crosses the wordmark at 694–736f.
-- **672–700f**: Subtitle, centred, two lines (y ≈ 950–1040):
-  "Entrepreneurship, Technology" / "Localization & Software".
-- **688–715f**: Final line, centred, two lines (y ≈ 1140–1260):
-  "Powering **Digital Trade**" / "Transformation" ("Digital Trade" in cyan).
-- **715–741f**: Full hold. Very slow push-in, drifting particles and a faint horizon glow at the bottom.
-- **741–750f**: Fade to black.
-- The lock-up spans y ≈ 720–1260, x 180–900, symmetric on x 540. It has no extra taglines or logos.
+### Scene 8 — TAMKEEN + contact (600–900f · 10.0 s)
+- **598–665f**: About 770 points form a **coherent spiral** and collapse onto a single horizontal
+  gold hairline (y ≈ 640). Length-clamped streaks give the motion blur.
+- **642–690f**: The **gold hairline** (≈ 840 px, fading ends, gold diamond at the centre) extends.
+- **652–700f**: **"TAMKEEN"** (Inter SemiBold 150 px, centred, top ≈ 460). Letters rise from a mask
+  with blur-to-sharp, staggered 3f, while the tracking tightens.
+- **672–700f**: Subtitle, 50 px, two lines: "Entrepreneurship, Technology" / "Localization & Software".
+- **690–716f**: Final line, 76 px, two lines: "Powering **Digital Trade**" / "Transformation".
+- **722–760f**: **Contact panel** (880 px wide, gold hairline border, soft glass fill) rises in:
+  "**Contact us :**" (58 px, gold) above the number **07803158768** (104 px SemiBold, white). The
+  digits rise into place one after another (2f stagger).
+- **760–890f**: Full hold, about 4.5 s with everything readable, and never static: very slow push-in,
+  a light gleam crosses the wordmark again at 810–856f, the contact panel's glow breathes, and
+  particles keep rising.
+- **891–900f**: Fade to black.
+- Lock-up spans y ≈ 460–1480, centred on x 540, ≤ 920 px wide.
 
 ---
 
@@ -283,31 +290,31 @@ Chapter markers (top band): **01 Submission · 02 Verifier Review · 03 Attaché
 | 5 → 6 | 410–430 | Accountant check streaks upward, camera cranes up to the mission, certificate rises |
 | 6 → 7 | 486–512 | Mission and statement clear, certificate pushes to hero size |
 | 7 → 8 | 596–650 | Certificate disintegrates into a spiral that collapses into the brand hairline |
+| 8 → contact | 722–760 | Contact panel rises beneath the lock-up; digits resolve in sequence |
 
 ---
 
-## 6. Typography & visual hierarchy (sized for a phone screen)
+## 6. Typography & visual hierarchy (sized for reading at 4 m)
 
-Sizes are in canvas pixels at 1080 × 1920. The minimum label size is 20 px.
+Sizes are in canvas pixels at 1080 × 1920. **Minimum essential text: 32–36 px.**
 
 | Role | Face | Size / weight | Treatment |
 |------|------|---------------|-----------|
-| Hero headline (Scene 1) | Inter | 80 px / 300 + 600 | 3 lines, left-aligned x 100, ≤ 800 px, "Attestation" gold |
-| Scene statements ("Verified", "Reviewed", "Digitally Attested") | Inter | 80–92 px / 300 | centred, ≤ 720 px, tracking settles wide → tight |
-| Wordmark "TAMKEEN" | Inter | 120 px / 600 | centred, tracking 28 → 14 px, ≤ 720 px |
-| Brand subtitle | Inter | 36 px / 400 | centred, 2 lines, 78% white |
-| Brand final line | Inter | 52 px / 300 | centred, 2 lines, "Digital Trade" cyan |
-| Chapter marker | JetBrains Mono + Inter | 22 px mono index/title · 32 px Inter Light line | top band, x 100, ≤ 2 lines |
-| Review rows / ledger / fee card | Inter | 30–34 px / 400 | with 20 px mono status underneath |
-| Status chips & rail labels | JetBrains Mono | 20–22 px / 500 | uppercase, tracked, in a hairline pill |
-| Instrument labels / overlines | JetBrains Mono | 20–24 px / 500 | uppercase, tracking 4–6 px |
-| Data (serial, fingerprint) | JetBrains Mono | 26–30 px / 500 | decode animation |
-| Document serif | Cormorant Garamond | scales with document (≈ 40 px at hero size) | documents only |
-| On-document micro-labels | JetBrains Mono | ≥ 13 px at 1:1 document scale | texture only; essential info repeated in callouts |
+| Hero headline (Scene 1) | Inter | 96 px / 300 + 600 | 3 lines, left-aligned x 80, "Attestation" gold |
+| Scene statements ("Verified", "Reviewed") | Inter | 128–132 px / 300 | centred, tracking settles wide → tight |
+| "Digitally / Attested" | Inter | 118 px / 300 + 600 | centred, 2 lines, "Attested" gold |
+| Wordmark "TAMKEEN" | Inter | 150 px / 600 | centred, tracking 28 → 10 px |
+| Brand subtitle | Inter | 50 px / 400 | centred, 2 lines |
+| Brand final line | Inter | 76 px / 300 | centred, 2 lines, "Digital Trade" cyan |
+| Contact | Inter | 58 px / 400 label · 104 px / 600 number | centred in a gold-bordered panel |
+| Chapter marker | JetBrains Mono + Inter | 38 px mono index/title · 46 px Inter Light line | top band, x 80, one line |
+| Review rows / ledger / fee card | Inter | 44–50 px / 400 | with 28–32 px mono status |
+| Status chips, rail labels, station labels | JetBrains Mono | 32–38 px / 500 | uppercase, tracked |
+| Callouts (Scene 7) | JetBrains Mono + Inter | 32 px title · 46 px value (serial 42 px mono) | top & bottom bands |
+| Document serif | Cormorant Garamond | scales with document | documents only (decorative at 4 m) |
 
 **Hierarchy**: one statement per moment. The order of attention is always **hero object →
-statement → status/labels → background**. No text line wider than 800 px (left-aligned) or 720 px
-(centred).
+statement → status/labels → background**. No text line wider than 920 px.
 
 **Palette**
 - Background `#02040A` → `#061226`, vertical radial falloff.
@@ -323,7 +330,8 @@ sovereign part of the workflow.
 
 ## 7. Deliverables
 
-- **New:** `out/certificate-of-origin-9x16.mp4`, H.264, 1080 × 1920, 30 fps, 750 frames, yuv420p.
-- **Kept unchanged:** `out/certificate-of-origin.mp4` (16:9) until the portrait version is approved.
-- Every scene is checked against the critical zone (x 100–900, y 250–1500) on still frames before
+- **New:** `out/certificate-of-origin-9x16-screen.mp4`, H.264, 1080 × 1920, 30 fps, 900 frames (30 s), yuv420p.
+- **Kept unchanged:** `out/certificate-of-origin-9x16.mp4` (25 s social version) and
+  `out/certificate-of-origin.mp4` (16:9).
+- Every scene is checked against the critical zone (x 80–1000, y 140–1780) on still frames before
   the final render.

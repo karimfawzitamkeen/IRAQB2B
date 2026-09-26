@@ -9,7 +9,7 @@ import {PChapter} from '../ui';
 
 /** Scene 3 — Verifier review (180–255f). Neutral, human review language only. */
 const ROWS = ['Certificate reviewed', 'Invoice attached', 'Required information checked', 'Documents complete'];
-const RING: [number, number] = [CX, 800];
+const RING: [number, number] = [CX, 700];
 
 export const P3Verifier: React.FC<{frame: number}> = ({frame: f}) => {
 	if (f < 176 || f > 272) return null;
@@ -36,13 +36,13 @@ export const P3Verifier: React.FC<{frame: number}> = ({frame: f}) => {
 
 	return (
 		<AbsoluteFill>
-			<PChapter frame={f} start={184} end={246} index="02" title="Verifier Review" sub="A verifier reviews the submitted documents." />
+			<PChapter frame={f} start={184} end={246} index="02" title="Verifier Review" sub="The verifier reviews the documents." />
 
 			{docs.map((d, i) => (
 				<DocPlace
 					key={i}
 					x={d.x}
-					y={lerp(800, 790, merge)}
+					y={lerp(660, 690, merge)}
 					scale={lerp(1.3, 0.56, enter) * lerp(1, 0.9, merge)}
 					ry={d.ry}
 					rz={d.rz}
@@ -55,14 +55,14 @@ export const P3Verifier: React.FC<{frame: number}> = ({frame: f}) => {
 			))}
 
 			{/* review rows */}
-			<div style={{position: 'absolute', left: SAFE.left, top: 1106, width: SAFE.right - SAFE.left, opacity: 1 - rowsOut}}>
+			<div style={{position: 'absolute', left: SAFE.left, top: 1000, width: SAFE.right - SAFE.left, opacity: 1 - rowsOut}}>
 				{ROWS.map((t, i) => {
 					const appear = ramp(f, 198 + i * 5, 212 + i * 5);
 					const res = ramp(f, 204 + i * 7, 218 + i * 7, 0, 1, (x) => x);
 					return (
-						<div key={i} style={{display: 'flex', alignItems: 'center', gap: 24, height: 86, opacity: appear, transform: `translateY(${(1 - appear) * 24}px)`}}>
-							<Check p={res} frame={f} size={46} pending />
-							<div style={{fontFamily: F.sans, fontSize: 32, fontWeight: 400, color: res > 0.5 ? C.white : 'rgba(244,247,251,0.5)'}}>{t}</div>
+						<div key={i} style={{display: 'flex', alignItems: 'center', gap: 28, height: 116, opacity: appear, transform: `translateY(${(1 - appear) * 24}px)`}}>
+							<Check p={res} frame={f} size={66} stroke={2.2} pending />
+							<div style={{fontFamily: F.sans, fontSize: 50, fontWeight: 400, color: res > 0.5 ? C.white : 'rgba(244,247,251,0.5)'}}>{t}</div>
 						</div>
 					);
 				})}
@@ -85,10 +85,10 @@ export const P3Verifier: React.FC<{frame: number}> = ({frame: f}) => {
 							</g>
 						) : null}
 					</svg>
-					<div style={{position: 'absolute', top: 1030, left: 0, right: 0, textAlign: 'center', opacity: word * (1 - ramp(f, 250, 260)), filter: word < 1 ? `blur(${(1 - word) * 10}px)` : undefined}}>
-						<div style={{fontFamily: F.sans, fontWeight: 300, fontSize: 92, color: C.white, letterSpacing: lerp(36, 3, word), marginRight: -lerp(36, 3, word)}}>Verified</div>
-						<Label size={20} spacing={5} color={C.cyan} style={{marginTop: 16}}>
-							Verifier review complete
+					<div style={{position: 'absolute', top: 940, left: 0, right: 0, textAlign: 'center', opacity: word * (1 - ramp(f, 250, 260)), filter: word < 1 ? `blur(${(1 - word) * 10}px)` : undefined}}>
+						<div style={{fontFamily: F.sans, fontWeight: 300, fontSize: 132, color: C.white, letterSpacing: lerp(36, 2, word), marginRight: -lerp(36, 2, word)}}>Verified</div>
+						<Label size={36} spacing={3} color={C.cyan} style={{marginTop: 18}}>
+							Review complete
 						</Label>
 					</div>
 				</>

@@ -18,24 +18,24 @@ export const PChapter: React.FC<{
 	const o = pin * (1 - pout);
 	if (o <= 0) return null;
 	return (
-		<div style={{position: 'absolute', left: SAFE.left, top: 270 + dy, width: SAFE.right - SAFE.left, opacity: o}}>
+		<div style={{position: 'absolute', left: SAFE.left, top: 150 + dy, width: SAFE.right - SAFE.left, opacity: o}}>
 			<div style={{display: 'flex', alignItems: 'center', gap: 18}}>
-				<Label color={C.gold} size={22} spacing={3}>
+				<Label color={C.gold} size={38} spacing={3}>
 					{index}
 				</Label>
-				<div style={{width: 56 * pin, height: 1, background: `linear-gradient(90deg, ${C.gold}, rgba(217,180,106,0))`}} />
-				<Label color={C.white} size={22} spacing={6} style={{transform: `translateX(${(1 - pin) * 16}px)`}}>
+				<div style={{width: 60 * pin, height: 2, background: `linear-gradient(90deg, ${C.gold}, rgba(217,180,106,0))`}} />
+				<Label color={C.white} size={38} spacing={5} style={{transform: `translateX(${(1 - pin) * 16}px)`}}>
 					{title}
 				</Label>
 			</div>
 			<div
 				style={{
-					marginTop: 14,
+					marginTop: 18,
 					fontFamily: F.sans,
 					fontWeight: 300,
-					fontSize: 30,
-					lineHeight: 1.25,
-					color: 'rgba(244,247,251,0.66)',
+					fontSize: 46,
+					lineHeight: 1.18,
+					color: 'rgba(244,247,251,0.78)',
 					transform: `translateY(${(1 - pin) * 10}px)`,
 				}}
 			>
@@ -58,16 +58,16 @@ export const Chip: React.FC<{text: string; color: string; p: number; dot?: boole
 		style={{
 			display: 'inline-flex',
 			alignItems: 'center',
-			gap: 12,
-			padding: '10px 20px 10px 16px',
+			gap: 14,
+			padding: '14px 28px 14px 22px',
 			borderRadius: 40,
 			border: `1px solid ${color}`,
 			background: 'rgba(4,12,26,0.82)',
 			boxShadow: `0 0 ${24 * p}px ${color}55`,
 			fontFamily: F.mono,
 			fontWeight: 500,
-			fontSize: 21,
-			letterSpacing: 3.5,
+			fontSize: 34,
+			letterSpacing: 3,
 			color,
 			whiteSpace: 'nowrap',
 			opacity: p,
@@ -75,7 +75,7 @@ export const Chip: React.FC<{text: string; color: string; p: number; dot?: boole
 			...style,
 		}}
 	>
-		{dot ? <div style={{width: 9, height: 9, borderRadius: 5, background: color, boxShadow: `0 0 10px ${color}`, opacity: 0.55 + 0.45 * Math.sin(frame / 4)}} /> : null}
+		{dot ? <div style={{width: 14, height: 14, borderRadius: 7, background: color, boxShadow: `0 0 10px ${color}`, opacity: 0.55 + 0.45 * Math.sin(frame / 4)}} /> : null}
 		{text}
 	</div>
 );
