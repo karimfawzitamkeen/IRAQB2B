@@ -1,4 +1,5 @@
 import React from 'react';
+import {Img, staticFile} from 'remotion';
 import {expoOut, lerp, ramp} from '../theme';
 import {BRAND, P, PF, goldGlow, whiteGlow} from './theme';
 
@@ -94,7 +95,7 @@ export const BrandMark: React.FC<{size: number; draw: number; frame: number; glo
 	);
 };
 
-/** TRADE (white) + POINT (gold) wordmark; Latin letters may animate individually. */
+/** TRAD (white) + POINT (gold) wordmark; Latin letters may animate individually. */
 export const Wordmark: React.FC<{frame: number; start: number; size: number; sweep?: number}> = ({frame: f, start, size, sweep = -1}) => {
 	const split = BRAND.toUpperCase().indexOf('POINT');
 	return (
@@ -210,50 +211,14 @@ export const Icon: React.FC<{name: string; size: number; color: string; stroke?:
 // ---------------------------------------------------------------------------
 const chip = (bg: string, fg: string, size = 26): React.CSSProperties => ({display: 'inline-flex', alignItems: 'center', gap: 8, padding: `${size * 0.22}px ${size * 0.6}px`, borderRadius: 999, background: bg, color: fg, fontFamily: PF.ar, fontWeight: 600, fontSize: size, whiteSpace: 'nowrap'});
 
-export type Member = {name: string; cat: string; city: string; badge?: 'verified' | 'diamond'; initials: string; hue: string};
-export const MEMBERS: Member[] = [
-	{name: 'مصنع أغذية', cat: 'صناعات غذائية', city: 'بغداد', badge: 'diamond', initials: 'م', hue: '#C2410C'},
-	{name: 'شركة لوجستية', cat: 'نقل وشحن', city: 'البصرة', badge: 'verified', initials: 'ل', hue: '#0E7490'},
-	{name: 'مجموعة إنشاءات', cat: 'مقاولات', city: 'أربيل', badge: 'verified', initials: 'إ', hue: '#4D7C0F'},
-	{name: 'مكتب استيراد وتصدير', cat: 'تجارة عامة', city: 'بغداد', badge: 'diamond', initials: 'ت', hue: '#7C3AED'},
-	{name: 'مصنع تعبئة', cat: 'صناعات تحويلية', city: 'النجف', badge: 'verified', initials: 'ع', hue: '#B45309'},
-	{name: 'شركة معدات طبية', cat: 'قطاع صحي', city: 'كربلاء', initials: 'ط', hue: '#0369A1'},
-	{name: 'شركة تقنية', cat: 'تقنية معلومات', city: 'السليمانية', badge: 'verified', initials: 'ق', hue: '#1D4ED8'},
-	{name: 'مزارع ومنتجات', cat: 'زراعة', city: 'بابل', initials: 'ز', hue: '#15803D'},
-];
-
-export const MemberCard: React.FC<{m: Member; w?: number}> = ({m, w = 620}) => (
-	<div dir="rtl" style={{width: w, padding: '26px 28px', boxSizing: 'border-box', borderRadius: 26, background: P.white, boxShadow: '0 30px 70px rgba(0,0,0,0.5)', display: 'flex', gap: 24, alignItems: 'center', position: 'relative', border: m.badge === 'diamond' ? `3px solid ${P.gold}` : '3px solid transparent'}}>
-		<div style={{width: 112, height: 112, borderRadius: 22, background: `linear-gradient(145deg, ${m.hue}, ${P.deep})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: PF.ar, fontWeight: 700, fontSize: 58, color: P.white, flexShrink: 0}}>{m.initials}</div>
-		<div style={{flex: 1, minWidth: 0}}>
-			<div style={{display: 'flex', alignItems: 'center', gap: 12}}>
-				<div style={{fontFamily: PF.ar, fontWeight: 700, fontSize: 42, color: P.ink, whiteSpace: 'nowrap'}}>{m.name}</div>
-				{m.badge === 'verified' ? <Icon name="check" size={34} color={P.teal} stroke={4} /> : null}
-			</div>
-			<div style={{display: 'flex', gap: 12, marginTop: 12}}>
-				<span style={chip(P.gray, P.ink, 24)}>{m.cat}</span>
-				<span style={chip('transparent', '#4B5A73', 24)}>
-					<Icon name="pin" size={24} color="#4B5A73" /> {m.city}
-				</span>
-			</div>
-		</div>
-		{m.badge ? (
-			<div style={{position: 'absolute', left: 22, top: -20, ...chip(m.badge === 'diamond' ? P.gold : P.teal, m.badge === 'diamond' ? P.navy : P.white, 24), boxShadow: '0 8px 20px rgba(0,0,0,0.35)'}}>
-				<Icon name={m.badge === 'diamond' ? 'diamond' : 'check'} size={24} color={m.badge === 'diamond' ? P.navy : P.white} stroke={3} />
-				{m.badge === 'diamond' ? 'عضو ماسي' : 'موثّق'}
-			</div>
-		) : null}
-	</div>
-);
-
-export type Listing = {title: string; cat: string; city: string; rfq?: boolean; art: 'steel' | 'grain' | 'solar' | 'med' | 'pack' | 'fabric'};
+export type Listing = {title: string; cat: string; rfq?: boolean; art: 'steel' | 'grain' | 'solar' | 'med' | 'pack' | 'fabric'};
 export const LISTINGS: Listing[] = [
-	{title: 'حديد تسليح', cat: 'مواد بناء', city: 'البصرة', art: 'steel'},
-	{title: 'طلب: ألواح شمسية', cat: 'طاقة', city: 'بغداد', rfq: true, art: 'solar'},
-	{title: 'أرز وحبوب', cat: 'مواد غذائية', city: 'النجف', art: 'grain'},
-	{title: 'طلب: معدات طبية', cat: 'قطاع صحي', city: 'أربيل', rfq: true, art: 'med'},
-	{title: 'مواد تغليف', cat: 'صناعة', city: 'بغداد', art: 'pack'},
-	{title: 'أقمشة ومنسوجات', cat: 'نسيج', city: 'الموصل', art: 'fabric'},
+	{title: 'حديد تسليح', cat: 'مواد بناء', art: 'steel'},
+	{title: 'طلب: ألواح شمسية', cat: 'طاقة', rfq: true, art: 'solar'},
+	{title: 'أرز وحبوب', cat: 'مواد غذائية', art: 'grain'},
+	{title: 'طلب: معدات طبية', cat: 'قطاع صحي', rfq: true, art: 'med'},
+	{title: 'مواد تغليف', cat: 'صناعة', art: 'pack'},
+	{title: 'أقمشة ومنسوجات', cat: 'نسيج', art: 'fabric'},
 ];
 
 const Art: React.FC<{k: Listing['art']}> = ({k}) => (
@@ -298,115 +263,51 @@ export const ListingCard: React.FC<{l: Listing; w?: number}> = ({l, w = 420}) =>
 			<Art k={l.art} />
 			<span style={{position: 'absolute', right: 18, top: 18, ...chip(l.rfq ? P.teal : P.gold, l.rfq ? P.white : P.navy, 24)}}>{l.rfq ? 'طلب عرض سعر' : 'منتج'}</span>
 		</div>
-		<div style={{padding: '20px 24px 24px'}}>
-			<div style={{fontFamily: PF.ar, fontWeight: 700, fontSize: 38, color: P.ink, whiteSpace: 'nowrap'}}>{l.title}</div>
-			<div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12}}>
-				<span style={chip(P.gray, P.ink, 22)}>{l.cat}</span>
-				<span style={{...chip('transparent', '#4B5A73', 22)}}>
-					<Icon name="pin" size={22} color="#4B5A73" /> {l.city}
-				</span>
+		<div style={{padding: '22px 24px 26px'}}>
+			<div style={{fontFamily: PF.ar, fontWeight: 700, fontSize: 42, color: P.ink, whiteSpace: 'nowrap'}}>{l.title}</div>
+			<div style={{display: 'flex', marginTop: 12}}>
+				<span style={chip(P.gray, P.ink, 24)}>{l.cat}</span>
 			</div>
-			<div style={{marginTop: 18, height: 58, borderRadius: 16, background: l.rfq ? P.teal : P.navy, color: P.white, fontFamily: PF.ar, fontWeight: 700, fontSize: 26, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>{l.rfq ? 'قدّم عرضك' : 'اطلب عرض سعر'}</div>
 		</div>
-	</div>
-);
-
-export type Opp = {title: string; sector: string; icon: string};
-export const OPPS: Opp[] = [
-	{title: 'شراكة في قطاع الطاقة', sector: 'طاقة متجددة', icon: 'handshake'},
-	{title: 'استثمار صناعي', sector: 'صناعات غذائية', icon: 'growth'},
-	{title: 'توسع لوجستي', sector: 'نقل وخدمات', icon: 'globe'},
-];
-export const OppCard: React.FC<{o: Opp; w?: number; featured?: boolean; frame: number}> = ({o, w = 800, featured = true, frame}) => (
-	<div dir="rtl" style={{width: w, padding: '34px 38px', boxSizing: 'border-box', borderRadius: 30, background: `linear-gradient(150deg, ${P.deep}, ${P.navy} 70%)`, border: `3px solid ${featured ? P.gold : 'rgba(245,245,242,0.2)'}`, boxShadow: `0 40px 90px rgba(0,0,0,0.6), 0 0 ${featured ? 50 : 0}px rgba(212,166,41,0.3)`, position: 'relative', overflow: 'hidden'}}>
-		<div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-			<span style={chip(P.gold, P.navy, 26)}>★ فرصة مميزة</span>
-			<Icon name={o.icon} size={64} color={P.goldLight} />
-		</div>
-		<div style={{fontFamily: PF.ar, fontWeight: 700, fontSize: 52, color: P.white, marginTop: 22, whiteSpace: 'nowrap'}}>{o.title}</div>
-		<div style={{display: 'flex', gap: 14, marginTop: 14}}>
-			<span style={chip('rgba(245,245,242,0.12)', P.white, 26)}>{o.sector}</span>
-			<span style={chip('rgba(31,165,154,0.25)', '#7FE3D9', 26)}>شراكة</span>
-		</div>
-		<svg width={w - 76} height={90} style={{marginTop: 18}}>
-			<polyline points={Array.from({length: 12}, (_, i) => `${(i / 11) * (w - 76)},${80 - i * 5 - 10 * Math.sin(i + frame / 8)}`).join(' ')} fill="none" stroke={P.gold} strokeWidth={4} strokeLinejoin="round" />
-		</svg>
 	</div>
 );
 
 export const SERVICES = [
-	{title: 'مستندات التصدير', en: 'Export Documentation', icon: 'box'},
+	{title: 'مستندات التصدير', en: 'Export Documentation Assistance', icon: 'box'},
 	{title: 'شهادة المنشأ', en: 'Certificate of Origin', icon: 'cert'},
 	{title: 'استشارات قانونية وتجارية', en: 'Trade Law & Legal Advisory', icon: 'law'},
 	{title: 'استشارات نمو الأعمال', en: 'Business Growth Consulting', icon: 'growth'},
 ];
 export const ServiceCard: React.FC<{s: (typeof SERVICES)[number]; w?: number; press?: number}> = ({s, w = 820, press = 0}) => (
-	<div dir="rtl" style={{width: w, padding: '30px 34px', boxSizing: 'border-box', borderRadius: 30, background: P.white, boxShadow: '0 40px 90px rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', gap: 26}}>
+	<div dir="rtl" style={{width: w, padding: '30px 34px', boxSizing: 'border-box', borderRadius: 30, background: P.white, boxShadow: `0 40px 90px rgba(0,0,0,0.55), 0 0 ${press * 40}px rgba(212,166,41,0.8)`, display: 'flex', alignItems: 'center', gap: 26, transform: `scale(${1 + press * 0.03})`}}>
 		<div style={{width: 120, height: 120, borderRadius: 28, background: `linear-gradient(145deg, ${P.teal}, #137C74)`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0}}>
 			<Icon name={s.icon} size={72} color={P.white} stroke={2.6} />
 		</div>
 		<div style={{flex: 1, minWidth: 0}}>
-			<div style={{fontFamily: PF.ar, fontWeight: 700, fontSize: 42, lineHeight: 1.25, color: P.ink, whiteSpace: 'nowrap'}}>{s.title}</div>
-			<div style={{fontFamily: PF.en, fontWeight: 600, fontSize: 22, color: '#5B6B85', direction: 'ltr', textAlign: 'right', marginTop: 2}}>{s.en}</div>
+			<div style={{fontFamily: PF.ar, fontWeight: 700, fontSize: 48, lineHeight: 1.25, color: P.ink, whiteSpace: 'nowrap'}}>{s.title}</div>
+			<div style={{fontFamily: PF.en, fontWeight: 600, fontSize: 26, color: '#5B6B85', direction: 'ltr', textAlign: 'right', marginTop: 4}}>{s.en}</div>
 		</div>
-		<div style={{display: 'flex', alignItems: 'center', height: 58, padding: '0 28px', borderRadius: 999, background: P.gold, color: P.navy, fontFamily: PF.ar, fontWeight: 700, fontSize: 28, flexShrink: 0, transform: `scale(${1 + press * 0.1})`, boxShadow: `0 0 ${press * 30}px ${P.gold}`}}>قدّم الآن</div>
 	</div>
 );
 
-/** Homepage hero inside a floating device frame (base 880×1180). */
-export const HomePanel: React.FC<{frame: number; hl?: number}> = ({frame: f, hl = 0}) => (
-	<div style={{width: 880, height: 1180, borderRadius: 36, background: '#0A1830', border: '4px solid rgba(245,245,242,0.18)', boxShadow: '0 60px 140px rgba(0,0,0,0.7), 0 0 80px rgba(212,166,41,0.18)', overflow: 'hidden', position: 'relative'}}>
-		{/* nav */}
-		<div style={{height: 110, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 40px', background: P.navy, borderBottom: '2px solid rgba(212,166,41,0.3)'}}>
-			<div style={{display: 'flex', alignItems: 'center', gap: 14}}>
-				<BrandMark size={62} draw={1} frame={f} glow={0.4} />
-				<div style={{fontFamily: PF.en, fontWeight: 900, fontSize: 34, color: P.white, letterSpacing: 1}}>
-					TRADE<span style={{color: P.gold}}>POINT</span>
-				</div>
-			</div>
-			<div style={{display: 'flex', gap: 18}}>
-				{[70, 90, 70].map((w, i) => (
-					<div key={i} style={{width: w, height: 10, borderRadius: 5, background: 'rgba(245,245,242,0.4)'}} />
-				))}
-			</div>
+/** A real platform screenshot (public/tradepoint/) as a floating device panel, with a passing light sweep. */
+export const SHOTS = {
+	home: {src: 'tradepoint/home.jpg', w: 1280, h: 2050},
+	members: {src: 'tradepoint/members.jpg', w: 1280, h: 2380},
+	membersBanner: {src: 'tradepoint/members-banner.jpg', w: 1175, h: 806},
+	memberDiamond: {src: 'tradepoint/member-diamond.jpg', w: 1014, h: 589},
+	investHero: {src: 'tradepoint/invest-hero.jpg', w: 1280, h: 1715},
+};
+export const Shot: React.FC<{shot: (typeof SHOTS)[keyof typeof SHOTS]; w: number; radius?: number; sweep?: number; children?: React.ReactNode; style?: React.CSSProperties}> = ({shot, w, radius = 28, sweep = -1, children, style}) => {
+	const h = (w * shot.h) / shot.w;
+	return (
+		<div style={{width: w, height: h, borderRadius: radius, overflow: 'hidden', position: 'relative', border: '3px solid rgba(245,245,242,0.22)', boxShadow: '0 50px 120px rgba(0,0,0,0.7), 0 0 60px rgba(212,166,41,0.18)', background: P.navy, ...style}}>
+			<Img src={staticFile(shot.src)} style={{width: '100%', height: '100%', display: 'block'}} />
+			{sweep > -0.5 && sweep < 1.5 ? <div style={{position: 'absolute', inset: 0, background: `linear-gradient(115deg, rgba(255,255,255,0) ${sweep * 100 - 18}%, rgba(255,255,255,0.16) ${sweep * 100}%, rgba(255,255,255,0) ${sweep * 100 + 18}%)`}} /> : null}
+			{children}
 		</div>
-		{/* hero */}
-		<div style={{position: 'relative', height: 700, background: `radial-gradient(ellipse 80% 70% at 70% 30%, #1B3E78 0%, ${P.deep} 45%, ${P.navy} 100%)`, overflow: 'hidden'}}>
-			<svg width={880} height={700} style={{position: 'absolute', inset: 0, opacity: 0.55}}>
-				{Array.from({length: 7}, (_, i) => (
-					<path key={i} d={`M ${440} 520 Q ${120 + i * 110} ${100 + (i % 3) * 60} ${-40 + i * 160} ${-20}`} fill="none" stroke={P.gold} strokeWidth={2} strokeDasharray="6 10" strokeDashoffset={-f * 2} />
-				))}
-				<circle cx={440} cy={520} r={14} fill={P.goldLight} />
-			</svg>
-			<div style={{position: 'absolute', left: 50, top: 90, fontFamily: PF.en, fontWeight: 800, fontSize: 78, lineHeight: 1.05, color: P.white}}>
-				Iraq&apos;s Digital
-				<br />
-				<span style={{color: P.gold, textShadow: hl > 0 ? `0 0 ${30 * hl}px ${P.gold}` : undefined}}>Trade Ecosystem</span>
-			</div>
-			<div style={{position: 'absolute', left: 50, top: 300, width: 520}}>
-				{[1, 0.8, 0.6].map((w, i) => (
-					<div key={i} style={{height: 14, width: `${w * 100}%`, borderRadius: 7, background: 'rgba(245,245,242,0.3)', marginBottom: 16}} />
-				))}
-			</div>
-			<div style={{position: 'absolute', left: 50, top: 440, display: 'flex', gap: 20}}>
-				<div style={{height: 76, padding: '0 40px', borderRadius: 16, background: P.gold, color: P.navy, fontFamily: PF.en, fontWeight: 800, fontSize: 30, display: 'flex', alignItems: 'center'}}>Join Now</div>
-				<div style={{height: 76, padding: '0 40px', borderRadius: 16, border: `3px solid ${P.white}`, color: P.white, fontFamily: PF.en, fontWeight: 700, fontSize: 30, display: 'flex', alignItems: 'center'}}>Explore</div>
-			</div>
-		</div>
-		{/* feature strip */}
-		<div style={{display: 'flex', gap: 22, padding: 36, background: P.gray, height: 370, boxSizing: 'border-box'}}>
-			{['users', 'store', 'handshake'].map((ic, i) => (
-				<div key={i} style={{flex: 1, borderRadius: 22, background: P.white, padding: 26, boxShadow: '0 10px 30px rgba(12,30,60,0.12)'}}>
-					<div style={{width: 84, height: 84, borderRadius: 20, background: P.navy, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-						<Icon name={ic} size={52} color={P.gold} />
-					</div>
-					<div style={{height: 14, width: '80%', borderRadius: 7, background: '#C9CFD8', marginTop: 26}} />
-					<div style={{height: 12, width: '60%', borderRadius: 6, background: '#DDE1E7', marginTop: 14}} />
-				</div>
-			))}
-		</div>
-	</div>
-);
+	);
+};
 
 // ---------------------------------------------------------------------------
 // TAMKEEN logo — vector rebuild of the supplied logo, reversed for dark screens

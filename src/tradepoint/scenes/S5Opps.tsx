@@ -1,35 +1,50 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {expoIn, expoInOut, expoOut, lerp, ramp, rnd} from '../../theme';
-import {Beat, BrandMark, Head, OPPS, OppCard, Scrim} from '../kit';
+import {Beat, BrandMark, Head, SHOTS, Scrim, Shot} from '../kit';
 import {P, PCX} from '../theme';
 
-/** Scene 5 — Investment & partnerships (330–405f): refined opportunity cards deal in, then routes open to wider markets. */
+/**
+ * Scene 5 — Investment & partnerships (330–405f), built on the real Opportunities page:
+ * the page swings in, the camera pushes onto "Verified investment projects" / "Strategic partnerships",
+ * then routes open to wider markets.
+ */
 const ROUTES = Array.from({length: 14}, (_, i) => {
 	const a = -Math.PI / 2 + ((i - 6.5) / 14) * Math.PI * 1.9 + rnd(`r5-${i}`) * 0.1;
 	return {a, len: 520 + rnd(`r5l${i}`) * 260, d: rnd(`r5d${i}`) * 5};
 });
 const HUB = {x: PCX, y: 1020};
+const PW5 = 820;
+const K = PW5 / SHOTS.investHero.w;
+const PH5 = SHOTS.investHero.h * K;
+// the two highlighted lines inside the screenshot (screenshot px)
+const LINES = [
+	{y: 1335, w: 720},
+	{y: 1478, w: 620},
+];
 
 export const S5Opps: React.FC<{frame: number}> = ({frame: f}) => {
 	if (f < 326 || f > 412) return null;
+	const inP = ramp(f, 331, 349, 0, 1, expoOut);
+	const push = ramp(f, 354, 368, 0, 1, expoInOut);
 	const wide = ramp(f, 378, 392, 0, 1, expoInOut);
 	const exit = ramp(f, 398, 408, 0, 1, expoIn);
+	const top = 1000 - PH5 / 2;
+	// push toward the two lines (≈ panel y 1400 px in screenshot space)
+	const focusY = 1400 * K;
+	const zoom = lerp(1, 1.3, push);
+	const shiftY = lerp(0, 1100 - (top + focusY), push);
 	return (
 		<AbsoluteFill style={{opacity: 1 - exit}}>
-			{/* the deck of opportunity cards: each new card deals to the front, the older ones recede */}
 			<AbsoluteFill style={{opacity: 1 - wide, transform: `scale(${1 - wide * 0.4})`, transformOrigin: `${HUB.x}px ${HUB.y}px`}}>
-				{OPPS.map((o, i) => {
-					const t = 332 + i * 14;
-					const p = ramp(f, t, t + 12, 0, 1, expoOut);
-					if (p <= 0) return null;
-					const back = OPPS.slice(i + 1).reduce((acc, _, k) => acc + ramp(f, 332 + (i + 1 + k) * 14, 342 + (i + 1 + k) * 14), 0);
-					return (
-						<div key={i} style={{position: 'absolute', left: PCX - 430, top: 860 - back * 100, transform: `perspective(1800px) translateX(${(1 - p) * (i % 2 ? -900 : 900)}px) rotateY(${(1 - p) * (i % 2 ? 50 : -50)}deg) scale(${1 - back * 0.1})`, opacity: Math.min(1, p * 2) * (1 - back * 0.3), zIndex: i}}>
-							<OppCard o={o} w={860} frame={f} />
-						</div>
-					);
-				})}
+				<div style={{position: 'absolute', left: PCX - PW5 / 2, top, transform: `translateY(${shiftY}px) perspective(2000px) translateX(${(1 - inP) * -800}px) rotateY(${lerp(50, 0, inP)}deg) scale(${lerp(0.75, 1, inP) * zoom})`, transformOrigin: `50% ${focusY}px`, opacity: Math.min(1, inP * 2)}}>
+					<Shot shot={SHOTS.investHero} w={PW5} radius={34} sweep={ramp(f, 340, 360, -0.4, 1.4)} style={{clipPath: `inset(${push * 60}% 0 0 0 round 34px)`}}>
+						{LINES.map((l, i) => {
+							const p = ramp(f, 358 + i * 6, 366 + i * 6, 0, 1, expoOut);
+							return <div key={i} style={{position: 'absolute', left: 30 * K, top: (l.y - 52) * K, width: l.w * K * p, height: 104 * K, borderRadius: 16, border: `4px solid ${P.gold}`, background: 'rgba(212,166,41,0.12)', boxShadow: `0 0 30px rgba(212,166,41,0.7)`, opacity: Math.min(1, p * 2)}} />;
+						})}
+					</Shot>
+				</div>
 			</AbsoluteFill>
 			{/* routes open to wider markets */}
 			{f >= 374 ? (

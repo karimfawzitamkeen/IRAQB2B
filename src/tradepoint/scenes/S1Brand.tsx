@@ -4,7 +4,7 @@ import {backOut, expoIn, expoOut, lerp, ramp, rnd} from '../../theme';
 import {BrandMark, Head, Wordmark} from '../kit';
 import {P, PCX, PF, goldGlow} from '../theme';
 
-/** Scene 1 — Brand impact (0–90f): gold point → route structure → TRADEPOINT. */
+/** Scene 1 — Brand impact (0–90f): gold point → route structure → TRADPOINT. */
 const SPARKS = Array.from({length: 26}, (_, i) => ({a: (i / 26) * Math.PI * 2 + rnd(`s1a${i}`) * 0.2, r: 380 + rnd(`s1r${i}`) * 420, d: rnd(`s1d${i}`) * 4}));
 const MY = 560;
 

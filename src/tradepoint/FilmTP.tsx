@@ -17,7 +17,7 @@ import {S8Close} from './scenes/S8Close';
 import {S9Tamkeen} from './scenes/S9Tamkeen';
 
 /**
- * TRADEPOINT · Iraq Trade Ecosystem — 30 s 1080×1920 portrait commercial (STORYBOARD-TRADEPOINT.md).
+ * TRADPOINT · Iraq Trade Ecosystem — 30 s 1080×1920 portrait commercial (STORYBOARD-TRADPOINT.md).
  * `guides` draws the critical text zone for review stills only.
  */
 export const FilmTP: React.FC<{guides?: boolean}> = ({guides = false}) => {
