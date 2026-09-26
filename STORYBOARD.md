@@ -1,278 +1,329 @@
 # Digital Certificate of Origin Attestation — 25s Vertical Motion Film
 
 **Format: 1080 × 1920 px · PORTRAIT 9:16 · 30 fps · 750 frames (25.0 s)**
-Remotion + React · 100% programmatic graphics · designed natively for mobile / social feeds
-(Reels, TikTok, Shorts, Stories, LinkedIn mobile). It is not a crop or rescale of a 16:9 layout.
+Remotion + React · 100% programmatic graphics · designed natively as a **general-purpose social
+master** (Reels, TikTok, Shorts, Stories, LinkedIn / X / Facebook mobile feeds). It is not a crop
+or rescale of the 16:9 version.
+
+> The existing 16:9 film (`out/certificate-of-origin.mp4`) is kept unchanged until the portrait
+> version has been reviewed and approved.
 
 ---
 
 ## 0. Creative concept — "One continuous journey, told vertically"
 
-The film is **one uninterrupted camera move** that follows a single Certificate of Origin across a
-global trade network. The world (globe, particles, light) persists across every scene. Scenes
-are "stations" the camera passes. Every transition is motivated by motion already on screen.
+The film is **one uninterrupted camera move** following a single Certificate of Origin through
+the approved attestation workflow. The world (globe, particles, light) persists across every
+scene. Scenes are "stations" the camera passes. Every transition is motivated by motion already
+on screen.
 
 In portrait the journey runs **on the vertical axis**:
-- Uploads **rise**: the exporter sits at the bottom and the platform at the top.
-- The camera **cranes and tilts** (up/down) instead of panning left/right.
-- The globe works as a **dome at the top** or a **planet horizon at the bottom**, never a small
-  sphere floating beside other content.
+- Submissions and payments **rise** from the Trader at the bottom toward the institutions above.
+- Instructions and confirmations **descend** from authority back to the Trader.
+- The camera **cranes and tilts** instead of panning.
+- The globe works as a **dome at the top** or a **planet horizon at the bottom**.
 - Reading order is always **top → middle → bottom**: context, then hero, then supporting information.
 
-Tone: sovereign, calm, precise. A central-bank or government-technology unveil, not an app
-walkthrough. No UI chrome, cursors, buttons or screen recordings.
+Tone: sovereign, calm, precise. A government-technology unveil, not an app walkthrough. No UI
+chrome, cursors, buttons or screen recordings.
 
-**The Certificate of Origin is the hero.** It is on screen, or being transformed, in 6 of 7
-scenes. In every scene where it appears it is the largest object in the frame.
+**The Certificate of Origin is the hero.** It is present in 7 of 8 scenes (in the fee scene it
+waits dimmed in the background), and wherever it appears it is the largest object in the frame.
 
----
-
-## 1. Canvas, safe areas and layout grid (1080 × 1920)
-
-```
- y=0    ┌──────────────────────────┐
-        │   platform UI overlay     │  0–250   : no text, no key detail (status bar, app header)
- y=250  ├──────────────────────────┤
-        │  TOP BAND                 │  250–440 : chapter marker / callouts / statements
- y=440  ├──────────────────────────┤
-        │                           │
-        │  HERO ZONE                │  440–1300: the certificate / globe / core
-        │  (optical centre ≈ 880)   │
-        │                           │
- y=1300 ├──────────────────────────┤
-        │  LOWER BAND               │  1300–1500: statements, confirmations, callouts
- y=1500 ├──────────────────────────┤
-        │   caption / CTA overlay   │  1500–1920: atmosphere only, no text or key detail
- y=1920 └──────────────────────────┘
-   x:  90 ────────────────── 990   (text safe; 90 px side margins)
-       key text stays left of x≈930 where a right-hand action rail may sit
-```
-
-- **Text-safe area:** x 90–990, y 250–1500. Right-aligned text ends at x ≤ 930.
-- **Key-detail area** (hero objects may extend here): x 60–1020, y 220–1560.
-- **Full bleed** (background, globe, particles, light) uses the whole 1080 × 1920.
-- **Horizontal centre line x = 540** is the main axis. Most compositions are centred and symmetric.
+**Honesty rule.** The film shows *people and offices reviewing and confirming*: the Verifier, the
+Commercial Attaché and the Accountant. It never implies automated regulatory or customs checks
+that the platform does not perform.
 
 ---
 
-## 2. Scene-by-scene storyboard
+## 1. Approved operational workflow
 
-| # | Time | Frames | Beat | Vertical composition |
-|---|------|--------|------|----------------------|
-| 1 | 0.0–3.0 s | 0–90 | World & title | globe dome top · document mid · title low |
-| 2 | 3.0–6.0 s | 90–180 | Submission | platform top · flight mid · exporter bottom |
-| 3 | 6.0–9.0 s | 180–270 | Verification | two documents mid · checklist low |
-| 4 | 9.0–12.0 s | 270–360 | Fees & settlement | fee sources top · secure core mid · confirmations low |
-| 5 | 12.0–16.0 s | 360–480 | Commercial Attaché & signature | mission top · arc from planet horizon · signed document |
-| 6 | 16.0–20.0 s | 480–600 | Final attested certificate | hero document centre · callouts top & bottom bands |
-| 7 | 20.0–25.0 s | 600–750 | TAMKEEN resolve | centred brand lock-up |
+```
+Trader Submission (+ digital service fee)
+  → Verifier Review
+  → Commercial Attaché Review          (eligibility only — no signature yet)
+  → Sovereign Fee: instruction → Trader payment → receipt submitted → Accountant confirmation
+  → Digital Attestation by the Commercial Attaché   (signature + seal + issuance)
+  → Final Attested Certificate
+  → TAMKEEN
+```
 
-Scenes overlap by about 10–20 frames at each handoff (see §3).
+Rules the film must respect:
+- The **digital service fee** appears only at the submission stage.
+- The **Commercial Attaché review** happens **before** the sovereign fee. It ends in
+  "Eligible for attestation" / "Requirements satisfied". There is **no signature and no seal** at
+  this stage.
+- The **sovereign fee** is paid only after a successful Attaché review. It is confirmed by the
+  **Accountant**.
+- The **signature, the official seal and issuance** appear only after the Accountant has confirmed
+  payment.
 
-### Scene 1 — World & title (0–90f)
-- **0–12f**: Black. Depth particles drift slowly upward. A faint cyan glow breathes in at the
-  top of the frame.
-- **6–60f**: A dot-matrix Earth (real coastlines, orthographic) rises out of darkness as a
-  large **dome in the upper half**: centre ≈ (540, 640), radius ≈ 460. It fills the width and its
-  atmosphere bleeds past both edges. Slow push-in and rotation. Graticule hairlines.
-  Trade arcs launch between world ports, each drawn with a bright head and fading tail, and
-  light pulses keep running along them.
+---
+
+## 2. Canvas, safe areas and layout grid (1080 × 1920)
+
+```
+ y=0    ┌────────────────────────────────┐
+        │  platform UI overlay            │  0–250    : no text, no key detail
+ y=250  ├────────────────────────────────┤
+        │  TOP BAND                       │  250–440  : chapter marker / callouts / instructions
+ y=440  ├────────────────────────────────┤
+        │                                 │
+        │  HERO ZONE                      │  440–1300 : certificate / globe / stations / core
+        │  (optical centre ≈ 880)         │
+        │                                 │
+ y=1300 ├────────────────────────────────┤
+        │  LOWER BAND                     │  1300–1500: statements, status rails, callouts
+ y=1500 ├────────────────────────────────┤
+        │  caption / CTA overlay          │  1500–1920: atmosphere only
+ y=1920 └────────────────────────────────┘
+ x:  0 ─ 100 ═════════ CRITICAL ═════════ 900 ─ 1080
+```
+
+- **Critical text and information: x 100–900, y 250–1500.** This covers every word, number, status,
+  check mark, QR, serial and the brand lock-up.
+  - Left-aligned blocks start at x 100 and end by x 900 (max 800 px).
+  - Centred blocks sit on the frame centre x 540 and are at most **720 px wide (x 180–900)**,
+    so they stay symmetric and inside the critical zone.
+- **Hero objects** (certificate, stations, core) keep their meaningful detail inside x 100–900. Their
+  glow, edges and shadows may extend to x 60–1020.
+- **Full bleed** (background, globe, particles, light, bokeh) uses the whole 1080 × 1920.
+
+---
+
+## 3. Scene structure & exact timings
+
+| # | Scene | Time | Frames | Dur. | Globe state |
+|---|-------|------|--------|------|-------------|
+| 1 | World & title | 0.0–3.0 s | 0–90 | 3.0 s | dome, top |
+| 2 | Trader submission + digital service fee | 3.0–6.0 s | 90–180 | 3.0 s | dim dome |
+| 3 | Verifier review | 6.0–8.5 s | 180–255 | 2.5 s | dim dome |
+| 4 | Commercial Attaché review | 8.5–11.0 s | 255–330 | 2.5 s | planet horizon, bottom |
+| 5 | Sovereign fee & Accountant confirmation | 11.0–14.0 s | 330–420 | 3.0 s | dim horizon |
+| 6 | Digital attestation (signature & seal) | 14.0–16.5 s | 420–495 | 2.5 s | faint horizon |
+| 7 | Final attested certificate | 16.5–20.0 s | 495–600 | 3.5 s | faint horizon |
+| 8 | TAMKEEN | 20.0–25.0 s | 600–750 | 5.0 s | faint glow |
+
+Frame ranges are the scene's "ownership" window. Visual handoffs overlap by 10–20 frames (§5).
+
+Chapter markers (top band): **01 Submission · 02 Verifier Review · 03 Attaché Review ·
+04 Sovereign Fee · 05 Digital Attestation**. Scenes 1, 7 and 8 have no chapter marker.
+
+---
+
+## 4. Scene-by-scene storyboard
+
+### Scene 1 — World & title (0–90f · 3.0 s)
+- **0–12f**: Black. Depth particles drift slowly upward and a faint cyan glow breathes in at the top.
+- **6–60f**: A dot-matrix Earth (real coastlines) rises as a large **dome in the upper half**:
+  centre ≈ (540, 640), R ≈ 460, with the atmosphere bleeding past both edges. Slow push-in and
+  rotation, graticule hairlines. Trade arcs draw between world ports with pulses running along them.
 - **22–64f**: The **Certificate of Origin** materialises in front of the globe's lower half,
-  centred at x 540, y ≈ 880, about 440 px wide. First a hairline wireframe draws its
-  perimeter, then a frosted glass body fills in, then its content rows reveal one by one. It floats
-  with a slight 3D tilt (rotateX 8°, rotateY −10°) and a gentle vertical bob.
-- **28–75f**: Title block in the **lower band**, left-aligned at x 90, y ≈ 1200–1500. Words
-  rise out of a mask one at a time:
-  - overline `INTERNATIONAL TRADE · DIGITAL SERVICES` (cyan, mono, 22 px)
-  - "Digital Certificate" / "of Origin" (white, Inter Light, 84 px, 2 lines)
-  - "Attestation" (gold, Inter SemiBold, 84 px, with a slow gold sheen)
+  centred at (540, 880), about 440 px wide. A wireframe perimeter draws first, then the glass
+  body fills in, then its rows reveal. Slight 3D tilt and a gentle vertical bob.
+- **28–75f**: Title, left-aligned at x 100, in the lower band (y ≈ 1200–1480):
+  - overline `INTERNATIONAL TRADE · DIGITAL SERVICES` (cyan mono, 22 px)
+  - "Digital Certificate" / "of Origin" (Inter Light 80 px, white)
+  - "Attestation" (Inter SemiBold 80 px, gold, slow sheen)
 
-  A soft dark scrim sits behind the title so it stays legible over the globe.
-- **74–104f (transition)**: The title lifts and blurs out. The globe **cranes up** and dims into
-  a background dome. The document **drops down** toward the Exporter station (continuity).
+  A soft dark scrim sits behind the title.
+- **74–104f (→ 2)**: The title lifts and blurs out. The globe cranes up into a dim dome. The
+  certificate drops down to the Trader.
 
-### Scene 2 — Submission (84–196f)
-- **Top band**: chapter marker `01 — SUBMISSION` / "The exporter files the trade documents digitally."
-- **Upper hero (y ≈ 560–850)**: the **Attestation Platform**, a stacked portal of five
-  concentric elliptical rings with a vertical light column and a glowing core, centred at
-  (540, 700). Label `ATTESTATION PLATFORM` below it.
-- **Bottom (y ≈ 1180–1490)**: the **Exporter**, a geometric emblem (hexagon frame, abstract
-  figure, rotating tick-ring) centred at (540, 1300). Label `EXPORTER · REGISTERED TRADER`.
-- A dotted **vertical conduit** (gentle S-curve) draws from the Exporter up to the Platform, with
-  data motes flowing upward.
-- **~100f & ~116f**: two document cards peel off the Exporter: *Certificate of Origin* (left
-  lane) and *Commercial Invoice* (right lane). Each is about 250 px wide and they **fly upward**
-  along the conduit with vertical motion blur and a light trail. A thin progress rail beside each
-  card reads `UPLOADING 0→100%`.
-- On arrival each card is absorbed into the portal with a ring shockwave and a ring speed-up.
-  A `RECEIVED ✓` row appears in a small ledger just above the portal (y ≈ 430–510).
-- **164–192f (transition)**: The camera pushes *into* the portal (zoom + blur). The documents
-  are reborn large at the centre (Scene 3).
+### Scene 2 — Trader submission + digital service fee (90–180f · 3.0 s)
+- **Top band**: `01 — SUBMISSION` / "The trader submits the documents digitally."
+- **Upper hero**: the **Attestation Platform**, a stacked portal of elliptical rings with a light
+  column, centred at (540, 700). Label `ATTESTATION PLATFORM` beneath it.
+- **Bottom**: the **Trader**, a geometric emblem (hexagon, abstract figure, tick-ring) at
+  (540, 1290). Label `TRADER`.
+- **92–120f**: A vertical conduit draws from Trader to Platform, with motes flowing upward.
+- **100–134f**: The *Certificate of Origin* card (left lane) **rises** along the conduit with vertical
+  motion blur, a light trail and an `UPLOADING` rail, then is absorbed with a ring shockwave.
+- **112–146f**: The *Commercial Invoice* card (right lane) follows the same way.
+- **146–170f — digital service fee (brief)**: A small **cyan fee packet** rises from the Trader
+  along the same conduit into the portal.
+- **Ledger above the portal (y ≈ 420–540, x 100–900)**. The rows appear in sequence, each with a
+  check:
+  - `Certificate of Origin — RECEIVED`
+  - `Commercial Invoice — RECEIVED`
+  - `Digital service fee — PAID` (cyan)
+- **166–194f (→ 3)**: The camera pushes into the portal (zoom + blur).
 
-### Scene 3 — Verification (176–290f)
-- **Top band**: `02 — VERIFICATION` / "Validated against trade rules and registries."
-- **Hero (y ≈ 520–1080)**: the two documents **side by side**, each about 380 px wide with a
-  36 px gap, angled slightly inward in 3D. They arrive from the push-in large and blurred, then
-  settle sharp.
-- A cyan **scan plane** sweeps top → bottom across both (194–238f). Behind the beam a fine
-  dot-grid glows and fades, and corner brackets lock onto each field as the beam passes it.
-- **Lower band (y ≈ 1130–1480)**: a validation stack of four rows, each resolving from a spinning
-  arc to a tick (staggered 8f):
-  `Origin criteria`, `HS classification`, `Exporter registry`, `Invoice consistency`.
-  Each row has a 34 px title and a 20 px mono status line.
-- **238–266f**: The checklist fades. The documents merge at the centre and dim. A large gold seal
-  ring (R ≈ 150) draws at (540, 820) and a check strokes in, with a gold ray burst.
-  **"Verified"** (96 px, Inter Light, tracking settling wide → tight) sits at y ≈ 1080, with
-  `4 / 4 CHECKS PASSED` in mono below it.
+### Scene 3 — Verifier review (180–255f · 2.5 s)
+- **Top band**: `02 — VERIFIER REVIEW` / "A verifier reviews the submitted documents."
+- **Hero (y ≈ 520–1060)**: the two documents side by side, each about 360 px wide, angled
+  slightly inward. They emerge from the push-in blurred and settle sharp.
+- **194–228f**: A cyan **review sweep** passes top → bottom across both. It reads as a reviewer's
+  attention passing over the page, with corner brackets settling on each section; it is not a
+  data-extraction scan.
+- **Lower band (y ≈ 1120–1460)**: four review rows. Each has a small icon and one short neutral
+  label, and resolves from a spinning arc to a check (staggered 7f, 204–236f):
+  - `Certificate reviewed`
+  - `Invoice attached`
+  - `Required information checked`
+  - `Documents complete`
+- **232–254f**: The rows fade. The documents merge at the centre. A cyan ring draws at (540, 820)
+  and a check strokes in. **"Verified"** (Inter Light 92 px, centred) appears with
+  `VERIFIER REVIEW COMPLETE` in mono below it.
+- **(→ 4)**: The check mark contracts into a single bright point: the transaction packet.
 
-### Scene 4 — Fees & settlement (266–374f)
-- **Top band**: `03 — SETTLEMENT` / "Service and sovereign fees, paid and confirmed."
-- **Upper hero (y ≈ 450–540)**: two fee sources side by side, each with a gold or cyan
-  accent bar and no boxed border:
-  - left: *Digital Service Fee* (cyan) · `PLATFORM PROCESSING`
-  - right: *Sovereign Fee* (gold) · `STATE ATTESTATION FEE`
-- **Hero (centre ≈ 540, 820)**: the **secure core**, three counter-rotating segmented rings
-  (outer R ≈ 240) around a hexagonal lock with a shackle.
-- **288–322f**: Value packets (cyan and gold diamonds with light trails) **fall** from the fee
-  sources into the core along curved paths. Each arrival sends a ring shockwave. Ring segments
-  light up in sequence, the shackle snaps shut (backOut easing) and a light burst follows.
-- **Lower band (y ≈ 1120–1460)**: two confirmation rows, each going Processing… → check →
-  `CONFIRMED`, plus a mono transaction reference `TX 7F3A 91C2 E04B 5D18 · SECURED` that
-  decrypts one character at a time.
-- **350–370f (transition)**: The core collapses to a bright point and the camera cranes down.
+### Scene 4 — Commercial Attaché review (255–330f · 2.5 s)
+- **Top band**: `03 — ATTACHÉ REVIEW` / "The Iraqi Commercial Attaché reviews the transaction."
+- **255–285f**: The camera cranes down. The globe appears as a **planet horizon in the lower
+  half**. The transaction packet leaves the platform node (Baghdad) on a tall great-circle arc
+  to the mission node, then a gold beam rises vertically to the mission.
+- **Mission (upper hero, centre ≈ 540, 560)**: an architectural line drawing (pediment, six columns,
+  stepped plinth) drawn stroke by stroke with a soft gold rim. Label `IRAQI COMMERCIAL ATTACHÉ`.
+- **278–310f**: The **certificate** rises in beneath the mission (centre ≈ 540, 980, about 400 px
+  wide) with a status chip `UNDER REVIEW` (white). A gold **review lens**, a thin rounded
+  rectangle, glides down the document. There is **no pen, no signature and no seal**.
+- **306–328f**: The chip changes to `ELIGIBLE FOR ATTESTATION` (gold) and a small gold review
+  check appears on the document margin. This mark is deliberately different from the official seal.
+- **Lower band**: **"Reviewed"** (Inter Light 84 px, centred) with `REQUIREMENTS SATISFIED` in mono.
+- **(→ 5)**: A gold **instruction packet** drops from the mission down toward the Trader
+  (fee due).
 
-### Scene 5 — Commercial Attaché & digital signature (356–500f)
-- **Top band**: `04 — ATTESTATION` / "Routed to the Iraqi Commercial Attaché for digital signature."
-- **Phase A (360–428f)**: The globe returns as a vast **planet horizon in the lower half**
-  (centre far below the frame, visible cap from y ≈ 900 down). A gold transaction packet leaves
-  the platform node (Baghdad), travels a tall great-circle arc to the mission node with a comet
-  trail, and then a gold beam rises **vertically** from that node to the mission above.
-- **Mission representation (upper hero, centre ≈ 540, 600)**: an architectural line drawing with
-  a pediment, six columns and a stepped plinth. It is drawn stroke by stroke and lit by a soft gold
-  rim. Label `IRAQI COMMERCIAL ATTACHÉ` / `DIPLOMATIC MISSION · TRADE ATTESTATION` beneath it.
-- **Phase B (426–488f)**: The mission cranes up and shrinks into the top band (scale ≈ 0.55,
-  y ≈ 360), taking over from the chapter marker. The planet sinks and dims. The **certificate rises
-  from the bottom** into the hero zone (centre ≈ 540, 900, about 480 px wide). The attaché's
-  signature draws itself (446–472f), then the circular seal stamps in (468–480f) with
-  overshoot, shockwave and a gold frame glow.
-- **Lower band**: **"Digitally Attested"** (84 px, Inter Light, one line, centred, y ≈ 1330), a gold
-  rule and `SIGNED · SEALED · TIME-STAMPED` in mono.
+### Scene 5 — Sovereign fee & Accountant confirmation (330–420f · 3.0 s)
+- **Top band**: `04 — SOVEREIGN FEE` / "Paid by the trader, confirmed by the accountant."
+- Layout: **Top** is the instruction / confirmation card (authority), the **middle** is the secure
+  core, and the **bottom** is the Trader. The certificate waits dimmed behind the core (on hold).
+- **330–350f — Instruction.** The gold packet lands as a card in the upper hero (y ≈ 470–600,
+  x 100–900): `SOVEREIGN ATTESTATION FEE` / status `DUE` (gold).
+- **348–372f — Trader payment.** A gold value packet **rises** from the Trader emblem (bottom,
+  y ≈ 1280) into the **secure core** (centre ≈ 540, 860: counter-rotating segmented rings around a
+  hexagonal lock). The shackle snaps shut (backOut) with a light burst.
+- **370–392f — Receipt submitted.** A small **receipt document** slides out of the core and
+  travels up into the top card. The card reads `PAYMENT RECEIPT · PROOF SUBMITTED`.
+- **390–414f — Accountant confirmation.** The top card flips (3D rotateX) to its confirmed side:
+  an Accountant emblem (a geometric ledger mark), `CONFIRMED BY ACCOUNTANT` and a gold check.
+- **Lower band — status rail (y ≈ 1380–1460)**: four nodes on a hairline that light up in sequence
+  as each beat completes: `DUE → PAID → RECEIPT → CONFIRMED`.
+- **(→ 6)**: The confirmation check shoots **upward** as a gold streak and the camera cranes up
+  with it, back to the mission.
 
-### Scene 6 — Final attested certificate (488–616f)
-- **488–520f**: The signed certificate pushes to hero size. It is centred at (540, 880) and about
-  620 px wide (y ≈ 455–1300), the largest it appears in the film.
-- Slow camera orbit (rotateY −10° → +6°, slight rotateX) and push-in (≈ +4%). A holographic
-  sheen sweeps across the surface at 530–574f.
-- Features come alive on the document: the QR code assembles module by module, the serial decodes,
-  the `VALIDATED` badge pulses and the hash fingerprint resolves.
-- **Callouts use the top and bottom bands, not the sides** (there is no room at the sides in 9:16).
-  Each callout is a 2-column label with a leader line that drops or rises into the document:
-  - **Top band, left**: `SECURE DOCUMENT IDENTITY` / "SHA-256 fingerprint", line down to the emblem.
-  - **Top band, right**: `DIGITAL VALIDATION` / "Cryptographically signed", line down to the badge.
-  - **Bottom band, left**: `UNIQUE SERIAL NUMBER` / `IQ-COO-2026-0847-3921` (mono, decoding),
-    line up to the serial.
-  - **Bottom band, right**: `QR VERIFICATION` / "Scan to verify authenticity", line up to the QR.
-  - Staggered at 508 / 516 / 524 / 532f.
-- There is no chapter marker in this scene, because the callouts occupy the top band.
+### Scene 6 — Digital attestation (420–495f · 2.5 s)
+- **Top band**: `05 — DIGITAL ATTESTATION` / "Signed and sealed by the Commercial Attaché."
+- **420–440f**: The mission re-enters at the top (compact, centre ≈ 540, 440). The certificate
+  rises into the hero zone (centre ≈ 540, 920, about 480 px wide) with its gold frame warming.
+- **440–468f — Digital signature.** The Attaché's signature draws itself on the attestation line
+  with a cyan light head.
+- **464–478f — Official seal.** A circular seal stamps in (overshoot, shockwave, gold glow), with
+  text running around the ring.
+- **476–494f — Issuance.** A status chip `CERTIFICATE ISSUED` appears. In the lower band,
+  **"Digitally Attested"** (Inter Light 80 px, centred) with a gold rule and
+  `SIGNED · SEALED · ISSUED` in mono.
+- **(→ 7)**: The mission and statement clear, and the certificate pushes up to hero size.
 
-### Scene 7 — TAMKEEN resolve (596–750f)
-- **598–665f**: The certificate dissolves into ~700 points of light. They form a **coherent
-  spiral** (all turning the same way) around the frame's optical centre and collapse onto a
-  single horizontal gold hairline. Short, length-clamped velocity streaks give the motion blur.
-- **642–690f**: The gold **hairline** (≈ 720 px, fading ends, small gold diamond at the centre)
+### Scene 7 — Final attested certificate (495–600f · 3.5 s)
+- **495–525f**: The certificate settles at hero size: centred at (540, 880), about 600 px wide
+  (y ≈ 470–1290). Slow orbit (rotateY −10° → +6°) and push-in (≈ +4%). A holographic sheen passes
+  at 535–575f.
+- Features come alive on the document: the QR assembles module by module, the serial decodes, the
+  `VALIDATED` badge pulses and the identity fingerprint resolves.
+- **Callouts in the top and bottom bands**, in two columns (x 100–480 | x 520–900), each with a
+  leader line into the document. Staggered 510 / 518 / 526 / 534f:
+  - **Top left**: `SECURE DIGITAL IDENTITY` / "Unique document fingerprint"
+  - **Top right**: `VALIDATION STATUS` / "Valid · Attested"
+  - **Bottom left**: `UNIQUE SERIAL NUMBER` / `IQ-COO-2026-0847-3921` (mono, decoding)
+  - **Bottom right**: `QR VERIFICATION` / "Scan to verify authenticity"
+- **(→ 8)**: The certificate disintegrates into points of light.
+
+### Scene 8 — TAMKEEN (600–750f · 5.0 s)
+- **598–665f**: About 700 points form a **coherent spiral** around the optical centre and
+  collapse onto a single horizontal gold hairline. Length-clamped streaks give the motion blur.
+- **642–690f**: A **gold hairline** (≈ 640 px, fading ends, small gold diamond at the centre)
   extends from the centre at y ≈ 900.
-- **652–700f**: **"TAMKEEN"**, centred at y ≈ 800. Letters rise from a mask with blur-to-sharp,
-  staggered by 3f, while the tracking tightens. A soft light gleam passes across the wordmark at 694–736f.
-- **672–700f**: Subtitle centred beneath the hairline (y ≈ 950–1040), in two lines:
+- **652–700f**: **"TAMKEEN"**, centred at y ≈ 800 (Inter SemiBold 120 px, block ≤ 720 px wide).
+  Letters rise from a mask with blur-to-sharp, staggered 3f, and the tracking tightens. A soft
+  gleam crosses the wordmark at 694–736f.
+- **672–700f**: Subtitle, centred, two lines (y ≈ 950–1040):
   "Entrepreneurship, Technology" / "Localization & Software".
-- **688–715f**: Final line centred (y ≈ 1140–1260), in two lines:
-  "Powering **Digital Trade**" / "Transformation" ("Digital Trade" in cyan, the rest in white).
-- **715–741f**: Full hold (≈ 0.9 s of everything readable, plus the time the lines take to land).
-  Very slow push-in, drifting particles and a faint planet horizon glow at the bottom.
+- **688–715f**: Final line, centred, two lines (y ≈ 1140–1260):
+  "Powering **Digital Trade**" / "Transformation" ("Digital Trade" in cyan).
+- **715–741f**: Full hold. Very slow push-in, drifting particles and a faint horizon glow at the bottom.
 - **741–750f**: Fade to black.
-- The lock-up block spans y ≈ 720–1260, centred on x 540. It is symmetric, uncluttered, and
-  has no extra taglines, badges or logos.
+- The lock-up spans y ≈ 720–1260, x 180–900, symmetric on x 540. It has no extra taglines or logos.
 
 ---
 
-## 3. Animation language & transition logic
+## 5. Animation language & transition logic
 
-**Easing vocabulary** (never linear for objects that arrive or settle):
-- `expoOut`: arrivals and reveals (fast start, long elegant settle).
-- `expoInOut`: camera moves and document travel.
-- `backOut`: small mechanical "snaps" (lock shackle, seal stamp).
-- Linear only for continuous systems (rotation, scan beams, particle drift, data pulses).
+**Easing vocabulary**
+- `expoOut`: arrivals and reveals.
+- `expoInOut`: camera moves and document or packet travel.
+- `backOut`: small mechanical snaps (lock shackle, seal stamp, card flip settle).
+- Linear only for continuous systems (rotation, sweeps, particle drift, pulses).
 
 **Rules**
-1. *Vertical storytelling.* Primary motion runs on the Y axis: uploads rise, payments fall into
-   the core, the camera cranes, and the mission beam rises. Lateral motion is limited to parallax
-   and small tilts.
-2. *Nothing is ever fully still.* Every hold has secondary motion: drift, parallax, breathing glow,
-   rotating rings, pulses on arcs.
-3. *Motivated transitions.* Each scene hands its energy to the next. No hard cuts and no standalone
-   generic cross-dissolves.
-4. *Layered depth.* Three parallax planes: far (stars/globe), mid (stations, documents) and near
-   (out-of-focus bokeh). The camera moves them at different rates, drifting vertically.
-5. *Draw-on before fill.* Objects first appear as hairline wireframes, then gain body. This is the
-   film's visual signature ("precision construction").
-6. *Motion blur.* Fast-moving objects get velocity-proportional directional blur on their axis of
-   travel, plus a light trail.
-7. *Staggers.* Text and lists stagger by 3–5 frames. Nothing appears all at once.
-8. *Confirmation grammar.* Every confirmed state goes spinning arc → full circle → check stroke →
-   soft glow. The same sequence is used for verification, receipt, payments and validation.
-9. *One focal point per moment.* In a narrow frame only one element animates prominently at a
-   time. Supporting elements settle before the next one starts.
+1. *Vertical storytelling.* Submissions and payments rise, instructions descend and the camera
+   cranes. Lateral motion is limited to parallax and small tilts.
+2. *Workflow fidelity.* Each stage shows the responsible party (Trader, Verifier, Commercial
+   Attaché, Accountant) and only the actions that party actually performs at that stage.
+3. *Two distinct marks.* A **review check** (Verifier, Attaché review, Accountant) is always a
+   simple ring + tick. The **official seal** appears only once, at digital attestation.
+4. *Nothing is ever fully still.* Holds keep secondary motion: drift, breathing glow, rotating
+   rings and pulses.
+5. *Motivated transitions.* Each scene hands its energy to the next. No hard cuts and no standalone
+   cross-dissolves.
+6. *Layered depth.* Far (stars/globe), mid (stations, documents) and near (bokeh) layers drift at
+   different vertical rates.
+7. *Draw-on before fill.* Objects first appear as hairline wireframes, then gain body.
+8. *Motion blur.* Velocity-proportional directional blur on the axis of travel, plus light trails.
+9. *Staggers.* 3–7 frames. Nothing appears all at once.
+10. *One focal point per moment.* In the narrow frame only one element animates prominently at a
+    time. This matters most in Scene 5, where the four fee beats are strictly sequential.
 
 **Transitions**
 | Handoff | Frames | Move |
 |---------|--------|------|
-| 1 → 2 | 74–104 | Title lifts out, globe cranes up to become a dim dome, document drops toward the Exporter |
-| 2 → 3 | 164–192 | Push into the platform portal (zoom + blur), documents re-emerge large |
-| 3 → 4 | 262–290 | Verified seal shrinks into the secure core (circle-to-circle match cut) |
-| 4 → 5 | 350–372 | Core collapses to a point, camera cranes down to the planet horizon, packet leaves the surface |
-| 5 → 6 | 476–520 | Mission and statement clear, the signed document pushes up to hero size |
-| 6 → 7 | 596–650 | Document disintegrates into a spiral of points that collapses into the brand hairline |
+| 1 → 2 | 74–104 | Title lifts out, globe cranes up to a dim dome, certificate drops to the Trader |
+| 2 → 3 | 166–194 | Push into the platform portal, documents re-emerge large |
+| 3 → 4 | 246–270 | Verified check contracts to a packet, camera cranes down to the planet horizon, packet arcs to the mission |
+| 4 → 5 | 320–342 | Gold instruction packet drops from the mission and lands as the "Fee due" card |
+| 5 → 6 | 410–430 | Accountant check streaks upward, camera cranes up to the mission, certificate rises |
+| 6 → 7 | 486–512 | Mission and statement clear, certificate pushes to hero size |
+| 7 → 8 | 596–650 | Certificate disintegrates into a spiral that collapses into the brand hairline |
 
 ---
 
-## 4. Typography & visual hierarchy (sized for a phone screen)
+## 6. Typography & visual hierarchy (sized for a phone screen)
 
-Sizes are in canvas pixels at 1080 × 1920. On a typical phone, 1 canvas px ≈ 0.36 pt, so the
-minimum 20 px label displays at about 7 pt, which is the smallest that stays legible in a feed.
+Sizes are in canvas pixels at 1080 × 1920. The minimum label size is 20 px.
 
 | Role | Face | Size / weight | Treatment |
 |------|------|---------------|-----------|
-| Hero headline (Scene 1) | Inter | 84 px / 300 + 600 | 3 lines max, tracking −1.5 px, left-aligned, "Attestation" in gold |
-| Scene statement ("Verified", "Digitally Attested") | Inter | 84–96 px / 300 | centred, tracking settles wide → tight |
-| Wordmark "TAMKEEN" | Inter | 144 px / 600 | centred, tracking 30 → 16 px (fits within 900 px) |
+| Hero headline (Scene 1) | Inter | 80 px / 300 + 600 | 3 lines, left-aligned x 100, ≤ 800 px, "Attestation" gold |
+| Scene statements ("Verified", "Reviewed", "Digitally Attested") | Inter | 80–92 px / 300 | centred, ≤ 720 px, tracking settles wide → tight |
+| Wordmark "TAMKEEN" | Inter | 120 px / 600 | centred, tracking 28 → 14 px, ≤ 720 px |
 | Brand subtitle | Inter | 36 px / 400 | centred, 2 lines, 78% white |
-| Brand final line | Inter | 52 px / 300 | centred, 2 lines, "Digital Trade" in cyan |
-| Chapter marker | JetBrains Mono + Inter | 22 px mono index/title · 32 px Inter Light description | top band, left-aligned, 2 lines max |
-| Body labels (checklist, confirmations) | Inter | 32–34 px / 400 | with 20 px mono status underneath |
-| Instrument labels / overlines | JetBrains Mono | 20–24 px / 500 | uppercase, tracking 4–6 px, cyan, gold or 55% white |
-| Data (serials, hashes) | JetBrains Mono | 26–30 px / 500 | decode/scramble animation |
-| Document serif (on the certificate) | Cormorant Garamond | scales with the document (≈ 40 px at hero size) | "official paper" feel, on documents only |
-| On-document micro-labels | JetBrains Mono | ≥ 13 px at 1:1 document scale | texture only; any essential information is repeated in a callout |
+| Brand final line | Inter | 52 px / 300 | centred, 2 lines, "Digital Trade" cyan |
+| Chapter marker | JetBrains Mono + Inter | 22 px mono index/title · 32 px Inter Light line | top band, x 100, ≤ 2 lines |
+| Review rows / ledger / fee card | Inter | 30–34 px / 400 | with 20 px mono status underneath |
+| Status chips & rail labels | JetBrains Mono | 20–22 px / 500 | uppercase, tracked, in a hairline pill |
+| Instrument labels / overlines | JetBrains Mono | 20–24 px / 500 | uppercase, tracking 4–6 px |
+| Data (serial, fingerprint) | JetBrains Mono | 26–30 px / 500 | decode animation |
+| Document serif | Cormorant Garamond | scales with document (≈ 40 px at hero size) | documents only |
+| On-document micro-labels | JetBrains Mono | ≥ 13 px at 1:1 document scale | texture only; essential info repeated in callouts |
 
-**Hierarchy**
-- One headline or statement per moment. Labels are always small, mono and tracked so they read
-  as instrumentation, never as app UI.
-- Order of attention in every scene: **hero object → statement → labels → background**.
-- No line of text wider than 900 px. Headlines break into short lines rather than shrinking.
+**Hierarchy**: one statement per moment. The order of attention is always **hero object →
+statement → status/labels → background**. No text line wider than 800 px (left-aligned) or 720 px
+(centred).
 
 **Palette**
-- Background: `#02040A` (black) → `#061226` (deep navy), with a vertical radial falloff.
-- Primary text: `#F4F7FB`.
-- Cyan accent: `#4FD8FF` (data, scanning, digital process).
-- Gold accent: `#D9B46A` (sovereignty, seals, attestation, final brand).
+- Background `#02040A` → `#061226`, vertical radial falloff.
+- Text `#F4F7FB`.
+- Cyan `#4FD8FF`: process, submission, service fee, verifier review.
+- Gold `#D9B46A`: sovereign authority, Attaché, sovereign fee, seal, brand.
 - Hairlines: white at 10–25% opacity.
 
-Cyan = *machine / process*. Gold = *authority / sovereign*. The film shifts from cyan-heavy
-(Scenes 2–4) toward gold (Scenes 5–7) as the document gains official status.
+The film moves from cyan (Scenes 2–3) to gold (Scenes 4–8) as the transaction enters the
+sovereign part of the workflow.
 
 ---
 
-## 5. Deliverable
+## 7. Deliverables
 
-- `out/certificate-of-origin-9x16.mp4`: H.264, 1080 × 1920, 30 fps, 750 frames, yuv420p.
-- Every frame is checked against the safe areas in §1 before the final render.
+- **New:** `out/certificate-of-origin-9x16.mp4`, H.264, 1080 × 1920, 30 fps, 750 frames, yuv420p.
+- **Kept unchanged:** `out/certificate-of-origin.mp4` (16:9) until the portrait version is approved.
+- Every scene is checked against the critical zone (x 100–900, y 250–1500) on still frames before
+  the final render.
