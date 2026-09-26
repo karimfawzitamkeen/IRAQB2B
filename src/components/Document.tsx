@@ -134,6 +134,22 @@ export const Emblem: React.FC<{size: number; color?: string; frame: number}> = (
 );
 
 // Hand-authored signature: tall capital loop, flowing script, crossing flourish.
+let SIG_PATH: SVGPathElement | null = null;
+/** Point along the signature stroke (0..1), for the pen's light head. Uses the live DOM. */
+const sigPoint = (t: number) => {
+	if (typeof document === 'undefined') return null;
+	if (!SIG_PATH) {
+		const ns = 'http://www.w3.org/2000/svg';
+		const svg = document.createElementNS(ns, 'svg');
+		svg.setAttribute('style', 'position:absolute;width:0;height:0;visibility:hidden');
+		SIG_PATH = document.createElementNS(ns, 'path');
+		SIG_PATH.setAttribute('d', SIGNATURE_D);
+		svg.appendChild(SIG_PATH);
+		document.body.appendChild(svg);
+	}
+	return SIG_PATH.getPointAtLength(SIG_PATH.getTotalLength() * t);
+};
+
 export const SIGNATURE_D =
 	'M18 64 C 22 44, 30 18, 42 10 C 52 4, 54 20, 44 34 C 36 46, 24 52, 30 44 C 40 34, 58 36, 62 48 C 64 56, 58 60, 60 54 C 64 42, 74 38, 78 46 C 80 52, 78 58, 84 54 C 90 50, 92 40, 98 40 C 104 40, 100 54, 108 54 C 116 54, 120 30, 128 16 C 132 10, 136 14, 132 26 C 126 42, 122 56, 130 56 C 138 56, 142 44, 150 44 C 156 44, 152 56, 160 56 C 170 56, 176 44, 186 42 C 200 40, 214 40, 232 34 M 10 70 C 70 60, 150 58, 250 50';
 
@@ -153,6 +169,7 @@ export type DocState = {
 	sheen?: number; // band position -0.5..1.5
 	glow?: number; // outer glow 0..1
 	gold?: number; // gold frame intensity 0..1
+	review?: number; // Attaché review mark (ring + tick, deliberately unlike the seal) 0..1
 };
 
 type Row = {y: number; h: number; label: string; bars?: number[]; text?: string; cols?: {label: string; text: string}[]};
@@ -218,6 +235,7 @@ export const CertificateDoc: React.FC<DocState & {frame: number; id: string}> = 
 	sheen = -1,
 	glow = 0,
 	gold = 0,
+	review = 0,
 }) => {
 	const outline = ramp(build, 0, 0.38, 0, 1, smooth);
 	const body = ramp(build, 0.22, 0.6, 0, 1, smooth);
@@ -294,7 +312,7 @@ export const CertificateDoc: React.FC<DocState & {frame: number; id: string}> = 
 				<Emblem size={58} frame={frame} />
 				<div>
 					<div style={{fontFamily: F.serif, fontWeight: 600, fontSize: 33, color: C.white, letterSpacing: 0.4, lineHeight: 1}}>{title}</div>
-					<div style={{fontFamily: F.mono, fontSize: 10.5, letterSpacing: 3, color: C.dim, marginTop: 9, textTransform: 'uppercase'}}>
+					<div style={{fontFamily: F.mono, fontSize: 12.5, letterSpacing: 2.4, color: C.dim, marginTop: 9, textTransform: 'uppercase'}}>
 						{variant === 'coo' ? 'International Trade · Attestation Form' : 'Trade Document · Invoice Record'}
 					</div>
 				</div>
@@ -313,8 +331,8 @@ export const CertificateDoc: React.FC<DocState & {frame: number; id: string}> = 
 						alignItems: 'center',
 						gap: 8,
 						fontFamily: F.mono,
-						fontSize: 11,
-						letterSpacing: 2.5,
+						fontSize: 12,
+						letterSpacing: 2.4,
 						color: C.cyan,
 						opacity: validated,
 						transform: `scale(${0.8 + 0.2 * validated})`,
@@ -338,14 +356,14 @@ export const CertificateDoc: React.FC<DocState & {frame: number; id: string}> = 
 							<div style={{display: 'flex', gap: 30}}>
 								{row.cols.map((c, j) => (
 									<div key={j} style={{flex: 1}}>
-										<div style={{fontFamily: F.mono, fontSize: 10, letterSpacing: 2.5, color: C.faint, textTransform: 'uppercase'}}>{c.label}</div>
+										<div style={{fontFamily: F.mono, fontSize: 13, letterSpacing: 2, color: C.faint, textTransform: 'uppercase'}}>{c.label}</div>
 										<div style={{fontFamily: F.mono, fontSize: 15, color: C.white, marginTop: 8, letterSpacing: 0.5}}>{c.text}</div>
 									</div>
 								))}
 							</div>
 						) : (
 							<>
-								<div style={{fontFamily: F.mono, fontSize: 10, letterSpacing: 2.5, color: C.faint, textTransform: 'uppercase'}}>{row.label}</div>
+								<div style={{fontFamily: F.mono, fontSize: 13, letterSpacing: 2, color: C.faint, textTransform: 'uppercase'}}>{row.label}</div>
 								<Bars bars={row.bars!} p={p} gold={row.label === 'Total amount'} table={row.label === 'Items'} />
 							</>
 						)}
@@ -359,7 +377,7 @@ export const CertificateDoc: React.FC<DocState & {frame: number; id: string}> = 
 				<>
 					<div style={{position: 'absolute', left: 44, right: 44, top: 578, height: 1, background: C.line, opacity: content(6)}} />
 					<div style={{position: 'absolute', left: 44, top: 596, opacity: content(6)}}>
-						<div style={{fontFamily: F.mono, fontSize: 10, letterSpacing: 2.5, color: C.faint}}>ATTESTED BY · COMMERCIAL ATTACHÉ</div>
+						<div style={{fontFamily: F.mono, fontSize: 13, letterSpacing: 2, color: C.faint}}>ATTESTED BY · COMMERCIAL ATTACHÉ</div>
 						<svg width={260} height={82} viewBox="0 0 260 82" style={{marginTop: 6, overflow: 'visible'}}>
 							<line x1={0} y1={78} x2={250} y2={78} stroke={C.line} />
 							<path
@@ -374,8 +392,26 @@ export const CertificateDoc: React.FC<DocState & {frame: number; id: string}> = 
 								strokeDashoffset={1 - signature}
 								style={{filter: `drop-shadow(0 0 ${3 + (signature < 1 ? 5 : 1)}px ${C.cyan})`}}
 							/>
+							{signature > 0 && signature < 1
+								? (() => {
+										const pt = sigPoint(signature);
+										return pt ? (
+											<g style={{filter: `drop-shadow(0 0 10px ${C.cyan})`}}>
+												<circle cx={pt.x} cy={pt.y} r={9} fill={C.cyan} fillOpacity={0.3} />
+												<circle cx={pt.x} cy={pt.y} r={3.4} fill="#FFFFFF" />
+											</g>
+										) : null;
+									})()
+								: null}
 						</svg>
 					</div>
+					{/* Attaché review mark: a simple ring + tick in the margin, never the official seal */}
+					{review > 0 ? (
+						<svg width={64} height={64} viewBox="0 0 40 40" style={{position: 'absolute', left: 494, top: 494, overflow: 'visible', opacity: Math.min(1, review * 2), filter: `drop-shadow(0 0 ${4 + (1 - review) * 10}px rgba(217,180,106,0.7))`}}>
+							<circle cx={20} cy={20} r={17} fill="rgba(217,180,106,0.08)" stroke={C.gold} strokeWidth={1.4} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - ramp(review, 0, 0.6)} transform="rotate(-90 20 20)" />
+							<path d="M12.5 20.5 L17.8 25.8 L28 15" fill="none" stroke={C.gold} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - ramp(review, 0.45, 1)} />
+						</svg>
+					) : null}
 					{/* seal stamp */}
 					{seal > 0 ? (
 						<div
@@ -398,13 +434,13 @@ export const CertificateDoc: React.FC<DocState & {frame: number; id: string}> = 
 					</div>
 					{/* serial */}
 					<div style={{position: 'absolute', left: 44, top: 718, opacity: serial > 0 ? 1 : 0}}>
-						<div style={{fontFamily: F.mono, fontSize: 10, letterSpacing: 2.5, color: C.faint}}>SERIAL NO.</div>
+						<div style={{fontFamily: F.mono, fontSize: 13, letterSpacing: 2, color: C.faint}}>SERIAL NO.</div>
 						<div style={{fontFamily: F.mono, fontWeight: 500, fontSize: 19, color: C.gold, marginTop: 6, letterSpacing: 1.2}}>
 							{scramble(SERIAL, serial, frame, 'serial')}
 						</div>
 					</div>
 					{/* identity */}
-					<div style={{position: 'absolute', left: 44, right: 44, bottom: 22, display: 'flex', justifyContent: 'space-between', fontFamily: F.mono, fontSize: 9.5, letterSpacing: 2, color: 'rgba(79,216,255,0.75)', opacity: identity}}>
+					<div style={{position: 'absolute', left: 44, right: 44, bottom: 22, display: 'flex', justifyContent: 'space-between', fontFamily: F.mono, fontSize: 12, letterSpacing: 1.6, color: 'rgba(79,216,255,0.75)', opacity: identity}}>
 						<span>{scramble(DOC_HASH, identity, frame, 'hash')}</span>
 						<span style={{color: C.faint}}>ID · SECURE</span>
 					</div>

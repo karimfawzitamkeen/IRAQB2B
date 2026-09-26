@@ -144,7 +144,7 @@ export const Scene5: React.FC<{frame: number}> = ({frame: f}) => {
 	);
 };
 
-const Mission: React.FC<{draw: number; f: number}> = ({draw, f}) => {
+export const Mission: React.FC<{draw: number; f: number}> = ({draw, f}) => {
 	const seg = (i: number, n: number) => ramp(draw, (i / n) * 0.7, (i / n) * 0.7 + 0.3, 0, 1, smooth);
 	const cols = [92, 144, 196, 244, 296, 348];
 	const N = 12;

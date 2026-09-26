@@ -121,7 +121,9 @@ export const pointAt = (pts: {x: number; y: number; visible: boolean}[], t: numb
 // ---------------------------------------------------------------------------
 // Camera path for the globe across the whole film (continuity layer)
 // ---------------------------------------------------------------------------
-export const globeView = (f: number): View & {opacity: number; blur: number; arcs: number} => ({
+export type GlobeCam = View & {opacity: number; blur: number; arcs: number};
+
+export const globeView = (f: number): GlobeCam => ({
 	lon0: 14 + f * 0.085,
 	lat0: kf(f, [[0, 20], [355, 22], [392, 26], [452, 44], [750, 46]]),
 	cx: kf(f, [[0, 1190], [85, 1210], [108, 960], [355, 960], [392, 660], [428, 660], [458, 900], [750, 960]]),
@@ -155,8 +157,13 @@ const dotPath = (pts: {x: number; y: number; r: number}[]) =>
 		)
 		.join('');
 
-export const Globe: React.FC<{frame: number}> = ({frame}) => {
-	const v = globeView(frame);
+export const Globe: React.FC<{frame: number; cam?: (f: number) => GlobeCam; w?: number; h?: number}> = ({
+	frame,
+	cam = globeView,
+	w = 1920,
+	h = 1080,
+}) => {
+	const v = cam(frame);
 	if (v.opacity <= 0.001) return null;
 	const dots = getDots();
 
@@ -166,7 +173,7 @@ export const Globe: React.FC<{frame: number}> = ({frame}) => {
 	for (const [lat, lon] of dots) {
 		const p = project(lat, lon, v);
 		if (p.z <= 0.02) continue;
-		if (p.y < -20 || p.y > 1100 || p.x < -20 || p.x > 1940) continue;
+		if (p.y < -20 || p.y > h + 20 || p.x < -20 || p.x > w + 20) continue;
 		const b = Math.min(3, Math.floor(p.z * 4));
 		buckets[b].push({x: p.x, y: p.y, r: (0.9 + p.z * 1.05) * rs});
 	}
@@ -211,8 +218,8 @@ export const Globe: React.FC<{frame: number}> = ({frame}) => {
 
 	return (
 		<svg
-			width={1920}
-			height={1080}
+			width={w}
+			height={h}
 			style={{
 				position: 'absolute',
 				inset: 0,

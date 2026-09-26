@@ -3,16 +3,16 @@ import {AbsoluteFill} from 'remotion';
 import {C, kf, rnd} from '../theme';
 
 const STARS = Array.from({length: 220}, (_, i) => ({
-	x: rnd(`sx${i}`) * 1920,
-	y: rnd(`sy${i}`) * 1080,
+	x: rnd(`sx${i}`),
+	y: rnd(`sy${i}`),
 	d: 0.15 + rnd(`sd${i}`) * 0.85,
 	tw: rnd(`st${i}`) * Math.PI * 2,
 	gold: rnd(`sg${i}`) > 0.86,
 }));
 
 const BOKEH = Array.from({length: 11}, (_, i) => ({
-	x: rnd(`bx${i}`) * 1920,
-	y: rnd(`by${i}`) * 1080,
+	x: rnd(`bx${i}`),
+	y: rnd(`by${i}`),
 	r: 30 + rnd(`br${i}`) * 90,
 	s: 0.3 + rnd(`bs${i}`) * 0.7,
 	gold: i % 3 === 0,
@@ -24,8 +24,14 @@ export const camDrift = (f: number) => ({
 	y: Math.sin(f / 90) * 10,
 });
 
-export const Background: React.FC<{frame: number}> = ({frame}) => {
-	const cam = camDrift(frame);
+export const Background: React.FC<{frame: number; w?: number; h?: number; vertical?: boolean}> = ({
+	frame,
+	w = 1920,
+	h = 1080,
+	vertical = false,
+}) => {
+	// landscape: lateral camera drift · portrait: particles rise (vertical storytelling)
+	const cam = vertical ? {x: Math.sin(frame / 80) * 14, y: -frame * 1.1} : camDrift(frame);
 	const warm = kf(frame, [[0, 0], [420, 0], [520, 1], [750, 1]]);
 	return (
 		<AbsoluteFill>
@@ -38,19 +44,19 @@ export const Background: React.FC<{frame: number}> = ({frame}) => {
 			{/* volumetric light cone from above */}
 			<AbsoluteFill
 				style={{
-					background: `radial-gradient(ellipse 35% 60% at 50% -10%, rgba(79,216,255,${0.07 - warm * 0.03}) 0%, rgba(79,216,255,0) 70%)`,
+					background: `radial-gradient(ellipse ${vertical ? '70% 40%' : '35% 60%'} at 50% -10%, rgba(79,216,255,${0.07 - warm * 0.03}) 0%, rgba(79,216,255,0) 70%)`,
 				}}
 			/>
 			<AbsoluteFill
 				style={{
-					background: `radial-gradient(ellipse 45% 40% at 70% 110%, rgba(217,180,106,${0.02 + warm * 0.05}) 0%, rgba(217,180,106,0) 70%)`,
+					background: `radial-gradient(ellipse ${vertical ? '90% 30%' : '45% 40%'} at ${vertical ? 50 : 70}% 110%, rgba(217,180,106,${0.02 + warm * 0.05}) 0%, rgba(217,180,106,0) 70%)`,
 				}}
 			/>
 			{/* star field / particles in depth */}
-			<svg width={1920} height={1080} style={{position: 'absolute', inset: 0}}>
+			<svg width={w} height={h} style={{position: 'absolute', inset: 0}}>
 				{STARS.map((s, i) => {
-					const x = (((s.x + cam.x * s.d * 0.6) % 1920) + 1920) % 1920;
-					const y = (((s.y + cam.y * s.d - frame * 0.08 * s.d) % 1080) + 1080) % 1080;
+					const x = (((s.x * w + cam.x * s.d * 0.6) % w) + w) % w;
+					const y = (((s.y * h + cam.y * s.d - frame * 0.08 * s.d) % h) + h) % h;
 					const tw = 0.55 + 0.45 * Math.sin(frame / 14 + s.tw);
 					return (
 						<circle
@@ -66,8 +72,12 @@ export const Background: React.FC<{frame: number}> = ({frame}) => {
 			</svg>
 			{/* out-of-focus foreground bokeh */}
 			{BOKEH.map((b, i) => {
-				const x = (((b.x + cam.x * (1.2 + b.s)) % 2200) + 2200) % 2200 - 140;
-				const y = b.y + Math.sin(frame / 50 + i) * 20;
+				const x = vertical
+					? b.x * w + Math.sin(frame / 60 + i) * 30
+					: (((b.x * w + cam.x * (1.2 + b.s)) % 2200) + 2200) % 2200 - 140;
+				const y = vertical
+					? ((((b.y * (h + 280) + cam.y * (0.8 + b.s)) % (h + 280)) + h + 280) % (h + 280)) - 140
+					: b.y * h + Math.sin(frame / 50 + i) * 20;
 				return (
 					<div
 						key={i}
@@ -92,12 +102,14 @@ const GRAIN = `url("data:image/svg+xml;utf8,${encodeURIComponent(
 )}")`;
 
 /** Lens finishing: vignette + animated film grain + subtle letterbox falloff. */
-export const Finish: React.FC<{frame: number}> = ({frame}) => (
+export const Finish: React.FC<{frame: number; vertical?: boolean}> = ({frame, vertical}) => (
 	<AbsoluteFill style={{pointerEvents: 'none'}}>
 		<AbsoluteFill
 			style={{
 				background:
-					'radial-gradient(ellipse 75% 75% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 85%, rgba(0,0,0,0.85) 100%)',
+					vertical
+						? 'radial-gradient(ellipse 85% 70% at 50% 48%, rgba(0,0,0,0) 58%, rgba(0,0,0,0.5) 86%, rgba(0,0,0,0.82) 100%)'
+						: 'radial-gradient(ellipse 75% 75% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 85%, rgba(0,0,0,0.85) 100%)',
 			}}
 		/>
 		<AbsoluteFill
