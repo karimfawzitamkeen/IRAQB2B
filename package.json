@@ -7,10 +7,13 @@
     "studio": "remotion studio",
     "render": "remotion render CertificateOfOrigin9x16 out/certificate-of-origin-9x16-screen.mp4 --image-format=png",
     "render:16x9": "remotion render CertificateOfOrigin out/certificate-of-origin.mp4",
-    "typecheck": "tsc -p ."
+    "typecheck": "tsc -p .",
+    "render:sla": "remotion render SmartLegalAdvisor9x16 out/smart-legal-advisor-9x16.mp4 --image-format=png"
   },
   "dependencies": {
+    "@fontsource/amiri": "^5.3.0",
     "@fontsource/cormorant-garamond": "^5.3.0",
+    "@fontsource/ibm-plex-sans-arabic": "^5.3.0",
     "@fontsource/inter": "^5.3.0",
     "@fontsource/jetbrains-mono": "^5.3.0",
     "@remotion/cli": "4.0.290",
