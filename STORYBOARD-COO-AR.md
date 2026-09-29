@@ -1,8 +1,15 @@
 # إطلاق المنصة الرقمية لتصديق شهادة المنشأ — فيلم الافتتاح (عربي)
 
-Composition `CertificateOfOriginAR9x16` · `src/coo-ar/` · output `out/certificate-of-origin-ar-9x16.mp4`
-**1080 × 1920 · 9:16 · 30 fps · 3360 frames (112 s) · H.264 yuv420p**, for the same portrait display
-as `out/certificate-of-origin-9x16-screen.mp4`, which is left unchanged.
+Two masters of the same film, both 30 fps, 3360 frames (112 s), H.264 yuv420p with AAC audio:
+- **16:9 ceremony screen, 1920 × 1080:** composition `CertificateOfOriginAR16x9`, output
+  `out/certificate-of-origin-ar-16x9.mp4`. Each scene is re-laid out for landscape: text column on
+  the right (the Arabic reading side), visuals on the left, a horizontal workflow chart, and a
+  two-column closing slate. It is not a crop of the portrait film.
+- **9:16 portrait display, 1080 × 1920:** composition `CertificateOfOriginAR9x16`, output
+  `out/certificate-of-origin-ar-9x16.mp4`.
+
+Source: `src/coo-ar/` (`LandCtx` switches the layout). The earlier
+`out/certificate-of-origin-9x16-screen.mp4` is left unchanged.
 
 ## Purpose
 Opening film for the platform-launch ceremony, attended by the Minister and the public:
@@ -47,4 +54,23 @@ after the Accountant confirms payment.
 - Type: Amiri (formal naskh) for the patronage and names, Cairo for headings, IBM Plex Sans
   Arabic for body lines. Step numbers use Arabic-Indic digits.
 - The ornament is geometric and decorative. No official state emblem or logo is imitated.
-- There is no audio track. Music or a voice-over can be added later.
+## Music
+The score is original, synthesised by `scripts/coo-ar-score.py` into `public/coo-ar/score.wav`
+(48 kHz stereo). It uses no samples or third-party music, so there are no licensing issues.
+Regenerate it with `python3 scripts/coo-ar-score.py` (needs numpy).
+- **Instruments:** string-like pads, soft sub bass, a plucked pulse, bells, impacts and risers.
+- **Harmony:** D minor. It moves to D major at the digital attestation (the seal) and for the
+  benefits and the closing.
+- **Timed to the picture:**
+  - Impacts land exactly on every scene cut: launch, credits, paper to digital, the chart, and
+    each of the six steps.
+  - A bell sounds under the Minister's name.
+  - Chimes mark the key events: documents received, documents complete, eligible, payment
+    confirmed, verified.
+  - A deep impact marks the seal.
+  - Each benefit card gets its own accent.
+  - Clock ticks sit under the paper scene.
+  - From the workflow chart onwards, a 100 BPM pulse (one eighth note every 9 frames) drives the
+    scenes.
+- **Levels:** peak −1 dBFS. The mix was balanced by spectrum analysis, since it could not be
+  auditioned in the build environment. It fades in and out with the picture.

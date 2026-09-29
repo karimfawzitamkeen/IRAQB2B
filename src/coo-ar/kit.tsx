@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {createContext, useContext} from 'react';
 import {C, F, expoOut, ramp, scramble, smooth} from '../theme';
 import {DOC_H, DOC_W, Emblem, QRCode, SERIAL, SIGNATURE_D} from '../components/Document';
 import {AF, ASAFE, STEPS} from './theme';
+
+/** true when rendering the 16:9 (1920×1080) master. */
+export const LandCtx = createContext(false);
+export const useLand = () => useContext(LandCtx);
 
 // ---------------------------------------------------------------------------
 // Type — Arabic animates per WORD only (never per letter), RTL, no letter-spacing
@@ -67,19 +71,19 @@ export const ArText: React.FC<{
 };
 
 /** Shows children in [a, b) with a soft in/out. */
-export const Win: React.FC<{frame: number; a: number; b: number; top: number; inF?: number; outF?: number; exit?: 'up' | 'fade' | 'zoom'; children: React.ReactNode; style?: React.CSSProperties}> = ({frame: f, a, b, top, inF = 1, outF = 12, exit = 'up', children, style}) => {
+export const Win: React.FC<{frame: number; a: number; b: number; top: number; left?: number; width?: number; inF?: number; outF?: number; exit?: 'up' | 'fade' | 'zoom'; children: React.ReactNode; style?: React.CSSProperties}> = ({frame: f, a, b, top, left, width, inF = 1, outF = 12, exit = 'up', children, style}) => {
 	if (f < a || f >= b) return null;
 	const i = ramp(f, a, a + inF);
 	const o = ramp(f, b - outF, b, 0, 1, (t) => t * t);
 	return (
-		<div style={{position: 'absolute', left: 0, right: 0, top, opacity: i * (1 - o), transform: exit === 'up' ? `translateY(${-o * 50}px)` : exit === 'zoom' ? `scale(${1 + o * 0.12})` : undefined, filter: o > 0 ? `blur(${o * 8}px)` : undefined, ...style}}>
+		<div style={{position: 'absolute', ...(left === undefined ? {left: 0, right: 0} : {left, width}), top, opacity: i * (1 - o), transform: exit === 'up' ? `translateY(${-o * 50}px)` : exit === 'zoom' ? `scale(${1 + o * 0.12})` : undefined, filter: o > 0 ? `blur(${o * 8}px)` : undefined, ...style}}>
 			{children}
 		</div>
 	);
 };
 
-export const GoldRule: React.FC<{p: number; w?: number; top: number}> = ({p, w = 560, top}) => (
-	<div style={{position: 'absolute', left: 540 - (w / 2) * p, width: w * p, top, height: 3, borderRadius: 2, background: `linear-gradient(90deg, rgba(217,180,106,0), ${C.gold}, rgba(217,180,106,0))`, boxShadow: `0 0 16px rgba(217,180,106,0.5)`}} />
+export const GoldRule: React.FC<{p: number; w?: number; top: number; cx?: number}> = ({p, w = 560, top, cx = 540}) => (
+	<div style={{position: 'absolute', left: cx - (w / 2) * p, width: w * p, top, height: 3, borderRadius: 2, background: `linear-gradient(90deg, rgba(217,180,106,0), ${C.gold}, rgba(217,180,106,0))`, boxShadow: `0 0 16px rgba(217,180,106,0.5)`}} />
 );
 
 /** Scrim behind type that sits over busy visuals. */
@@ -246,27 +250,31 @@ export const ArChip: React.FC<{text: string; color: string; p: number; frame: nu
 // ---------------------------------------------------------------------------
 // Step header + progress rail
 // ---------------------------------------------------------------------------
-export const StepHeader: React.FC<{frame: number; a: number; b: number; i: number; lines: string[]; titleSize?: number}> = ({frame: f, a, b, i, lines, titleSize = 100}) => (
-	<Win frame={f} a={a} b={b} top={ASAFE.top + 20} outF={14}>
-		<div style={{display: 'flex', justifyContent: 'center'}}>
-			<div dir="rtl" style={{display: 'inline-flex', alignItems: 'center', gap: 16, padding: '6px 28px', borderRadius: 999, border: `2px solid ${C.gold}`, background: 'rgba(217,180,106,0.1)', fontFamily: AF.display, fontWeight: 800, fontSize: 44, lineHeight: 1.3, color: C.gold, opacity: ramp(f, a, a + 10), transform: `scale(${0.8 + 0.2 * ramp(f, a, a + 12, 0, 1, expoOut)})`}}>
-				الخطوة {STEPS[i].n}
+export const StepHeader: React.FC<{frame: number; a: number; b: number; i: number; lines: string[]; titleSize?: number}> = ({frame: f, a, b, i, lines, titleSize = 100}) => {
+	const land = useLand();
+	return (
+		<Win frame={f} a={a} b={b} top={land ? 150 : ASAFE.top + 20} left={land ? 1000 : undefined} width={land ? 840 : undefined} outF={14}>
+			<div style={{display: 'flex', justifyContent: 'center'}}>
+				<div dir="rtl" style={{display: 'inline-flex', alignItems: 'center', gap: 16, padding: '6px 28px', borderRadius: 999, border: `2px solid ${C.gold}`, background: 'rgba(217,180,106,0.1)', fontFamily: AF.display, fontWeight: 800, fontSize: 44, lineHeight: 1.3, color: C.gold, opacity: ramp(f, a, a + 10), transform: `scale(${0.8 + 0.2 * ramp(f, a, a + 12, 0, 1, expoOut)})`}}>
+					الخطوة {STEPS[i].n}
+				</div>
 			</div>
-		</div>
-		<ArText lines={STEPS[i].long} frame={f} start={a + 4} size={titleSize} weight={900} style={{marginTop: 14}} />
-		<ArText lines={lines} frame={f} start={a + 14} size={50} font={AF.body} weight={600} color="rgba(244,247,251,0.86)" glow="none" stagger={2} lineHeight={1.45} style={{marginTop: 8}} />
-	</Win>
-);
+			<ArText lines={STEPS[i].long} frame={f} start={a + 4} size={land ? 92 : titleSize} weight={900} maxW={land ? 800 : 880} style={{marginTop: 14}} />
+			<ArText lines={lines} frame={f} start={a + 14} size={50} font={AF.body} weight={600} color="rgba(244,247,251,0.86)" glow="none" stagger={2} lineHeight={1.45} maxW={land ? 800 : 880} style={{marginTop: 8}} />
+		</Win>
+	);
+};
 
 export const Rail: React.FC<{frame: number; current: number; a: number; b: number; done?: boolean}> = ({frame: f, current, a, b, done}) => {
+	const land = useLand();
 	const o = ramp(f, a, a + 12) * (1 - ramp(f, b - 12, b));
 	if (o <= 0) return null;
-	const W = 760;
-	const x0 = 540 + W / 2;
+	const W = land ? 660 : 760;
+	const x0 = (land ? 1410 : 540) + W / 2;
 	const step = W / 5;
 	return (
-		<div style={{position: 'absolute', left: 0, top: 1640, width: 1080, height: 140, opacity: o}}>
-			<svg width={1080} height={140} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
+		<div style={{position: 'absolute', left: 0, top: land ? 910 : 1640, width: land ? 1920 : 1080, height: 140, opacity: o}}>
+			<svg width={land ? 1920 : 1080} height={140} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
 				<line x1={x0} y1={40} x2={x0 - W} y2={40} stroke={C.line} strokeWidth={4} />
 				<line x1={x0} y1={40} x2={x0 - step * current} y2={40} stroke={C.gold} strokeWidth={4} />
 				{STEPS.map((s, i) => {

@@ -23,6 +23,8 @@ export const RemotionRoot: React.FC = () => (
 		<Composition id="TamkeenDOOH9x16" component={FilmDOOH} durationInFrames={TDUR} fps={FPS} width={TW} height={TH} />
 		{/* Arabic ceremony film — Digital Certificate of Origin platform launch, 112 s, 1080×1920 */}
 		<Composition id="CertificateOfOriginAR9x16" component={FilmAR} durationInFrames={AR.ADUR} fps={FPS} width={AR.AW} height={AR.AH} />
+		{/* same film, 16:9 ceremony-screen master (1920×1080) */}
+		<Composition id="CertificateOfOriginAR16x9" component={FilmAR} durationInFrames={AR.ADUR} fps={FPS} width={AR.ALW} height={AR.ALH} defaultProps={{landscape: true}} />
 		{/* TRADPOINT · Iraq Trade Ecosystem — 30 s commercial (25 s film + TAMKEEN contact end card) for the same 1080×1920 display */}
 		<Composition id="TradePoint9x16" component={FilmTP} durationInFrames={TP.PDUR} fps={FPS} width={TP.PW} height={TP.PH} />
 		{/* Original landscape version — 1920×1080, 16:9 */}

@@ -6,6 +6,10 @@ export const ACX = 540;
 export const ADUR = 3360;
 /** Critical zone for a portrait display read at ~4 m (same as the display-screen CoO film). */
 export const ASAFE = {left: 80, right: 1000, top: 140, bottom: 1780};
+/** 16:9 ceremony-screen master. */
+export const ALW = 1920;
+export const ALH = 1080;
+export const ALSAFE = {left: 100, right: 1820, top: 60, bottom: 1020};
 
 export const AF = {
 	/** ceremonial naskh — patronage, names */
