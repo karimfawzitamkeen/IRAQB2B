@@ -10,6 +10,7 @@ the QR code and the particles are all generated programmatically.
 - **Smart Legal Advisor brand film (9:16, 1080×1920, 30 fps, 25 s):** [`out/smart-legal-advisor-9x16.mp4`](out/smart-legal-advisor-9x16.mp4), a separate composition `SmartLegalAdvisor9x16` in `src/sla/`, storyboard in [`STORYBOARD-SMART-LEGAL-ADVISOR.md`](STORYBOARD-SMART-LEGAL-ADVISOR.md)
 - **TAMKEEN outdoor-screens commercial (9:16, 1080×1920, 30 fps, 25 s):** [`out/tamkeen-dooh-9x16.mp4`](out/tamkeen-dooh-9x16.mp4), composition `TamkeenDOOH9x16` in `src/dooh/`, real screen photos in `public/dooh/`, decision record in [`STORYBOARD-TAMKEEN-DOOH.md`](STORYBOARD-TAMKEEN-DOOH.md)
 - **TRADPOINT · Iraq Trade Ecosystem commercial (9:16, 1080×1920, 30 fps, 30 s including the TAMKEEN contact end card):** [`out/tradepoint-9x16.mp4`](out/tradepoint-9x16.mp4), composition `TradePoint9x16` in `src/tradepoint/`, decision record in [`STORYBOARD-TRADPOINT.md`](STORYBOARD-TRADPOINT.md)
+- **Arabic ceremony film — Digital Certificate of Origin platform launch (9:16, 1080×1920, 30 fps, 112 s):** [`out/certificate-of-origin-ar-9x16.mp4`](out/certificate-of-origin-ar-9x16.mp4), composition `CertificateOfOriginAR9x16` in `src/coo-ar/`, decision record in [`STORYBOARD-COO-AR.md`](STORYBOARD-COO-AR.md)
 - **Original landscape version (16:9, 1920×1080):** [`out/certificate-of-origin.mp4`](out/certificate-of-origin.mp4), which predates the approved workflow order
 - **Storyboard, workflow, safe areas, animation language and typography:** [`STORYBOARD.md`](STORYBOARD.md)
 
@@ -23,6 +24,7 @@ npm run render:16x9     # 16:9 → out/certificate-of-origin.mp4
 npm run render:sla      # Smart Legal Advisor → out/smart-legal-advisor-9x16.mp4
 npm run render:dooh     # TAMKEEN outdoor screens → out/tamkeen-dooh-9x16.mp4
 npm run render:tp       # TRADPOINT commercial → out/tradepoint-9x16.mp4
+npm run render:ar       # Arabic ceremony film → out/certificate-of-origin-ar-9x16.mp4
 npm run typecheck
 ```
 

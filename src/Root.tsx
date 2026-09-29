@@ -5,6 +5,8 @@ import {Film9x16} from './portrait/Film9x16';
 import {FilmSLA} from './sla/FilmSLA';
 import {FilmDOOH} from './dooh/FilmDOOH';
 import {FilmTP} from './tradepoint/FilmTP';
+import {FilmAR} from './coo-ar/FilmAR';
+import * as AR from './coo-ar/theme';
 import * as TP from './tradepoint/theme';
 import {TDUR, TH, TW} from './dooh/theme';
 import {SLA_DUR, SLA_H, SLA_W} from './sla/theme';
@@ -19,6 +21,8 @@ export const RemotionRoot: React.FC = () => (
 		<Composition id="SmartLegalAdvisor9x16" component={FilmSLA} durationInFrames={SLA_DUR} fps={FPS} width={SLA_W} height={SLA_H} />
 		{/* TAMKEEN outdoor-screens commercial — same 1080×1920 LED master */}
 		<Composition id="TamkeenDOOH9x16" component={FilmDOOH} durationInFrames={TDUR} fps={FPS} width={TW} height={TH} />
+		{/* Arabic ceremony film — Digital Certificate of Origin platform launch, 112 s, 1080×1920 */}
+		<Composition id="CertificateOfOriginAR9x16" component={FilmAR} durationInFrames={AR.ADUR} fps={FPS} width={AR.AW} height={AR.AH} />
 		{/* TRADPOINT · Iraq Trade Ecosystem — 30 s commercial (25 s film + TAMKEEN contact end card) for the same 1080×1920 display */}
 		<Composition id="TradePoint9x16" component={FilmTP} durationInFrames={TP.PDUR} fps={FPS} width={TP.PW} height={TP.PH} />
 		{/* Original landscape version — 1920×1080, 16:9 */}

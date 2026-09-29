@@ -10,7 +10,8 @@
     "typecheck": "tsc -p .",
     "render:sla": "remotion render SmartLegalAdvisor9x16 out/smart-legal-advisor-9x16.mp4 --image-format=png",
     "render:dooh": "remotion render TamkeenDOOH9x16 out/tamkeen-dooh-9x16.mp4 --image-format=png",
-    "render:tp": "remotion render TradePoint9x16 out/tradepoint-9x16.mp4 --image-format=png"
+    "render:tp": "remotion render TradePoint9x16 out/tradepoint-9x16.mp4 --image-format=png",
+    "render:ar": "remotion render CertificateOfOriginAR9x16 out/certificate-of-origin-ar-9x16.mp4 --image-format=png"
   },
   "dependencies": {
     "@fontsource/amiri": "^5.3.0",
