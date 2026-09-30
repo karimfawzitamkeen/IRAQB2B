@@ -53,7 +53,7 @@ after the Accountant confirms payment.
   about 40 px, and statements are 100–150 px, for reading at about 4 m.
 - Type: Amiri (formal naskh) for the patronage and names, Cairo for headings, IBM Plex Sans
   Arabic for body lines. Step numbers use Arabic-Indic digits.
-- The ornament is geometric and decorative. No official state emblem or logo is imitated.
+- The ornament is a neutral medallion: rings, fine ticks and a globe with meridians. It deliberately avoids star and overlapping-square motifs, and imitates no official state emblem or logo.
 ## Music
 The score is original, synthesised by `scripts/coo-ar-score.py` into `public/coo-ar/score.wav`
 (48 kHz stereo). It uses no samples or third-party music, so there are no licensing issues.

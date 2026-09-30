@@ -1,6 +1,6 @@
 import React, {createContext, useContext} from 'react';
 import {C, F, expoOut, ramp, scramble, smooth} from '../theme';
-import {DOC_H, DOC_W, Emblem, QRCode, SERIAL, SIGNATURE_D} from '../components/Document';
+import {DOC_H, DOC_W, QRCode, SERIAL, SIGNATURE_D} from '../components/Document';
 import {AF, ASAFE, STEPS} from './theme';
 
 /** true when rendering the 16:9 (1920×1080) master. */
@@ -92,27 +92,40 @@ export const Scrim: React.FC<{top: number; h: number; o?: number}> = ({top, h, o
 );
 
 // ---------------------------------------------------------------------------
-// Ceremonial ornament: eight-point star within rings (geometric, not an official emblem)
+// Ceremonial medallion: rings, fine ticks and a globe with meridians (international trade).
+// Deliberately free of stars or overlapping-square motifs.
 // ---------------------------------------------------------------------------
 export const Ornament: React.FC<{size: number; draw: number; frame: number; glow?: number}> = ({size, draw, frame, glow = 1}) => {
 	const R = size / 2;
-	const sq = (k: number) => R * k * 2;
+	const g = R * 0.4; // globe radius
+	const dash = (p: number) => ({pathLength: 1, strokeDasharray: '1 1', strokeDashoffset: 1 - p});
 	return (
 		<svg width={size} height={size} viewBox={`${-R} ${-R} ${size} ${size}`} style={{overflow: 'visible', filter: `drop-shadow(0 0 ${14 * glow}px rgba(217,180,106,0.55))`}}>
-			<circle r={R * 0.96} fill="none" stroke={C.gold} strokeWidth={size * 0.006} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - ramp(draw, 0, 0.5)} transform="rotate(-90)" />
+			<circle r={R * 0.96} fill="none" stroke={C.gold} strokeWidth={size * 0.006} {...dash(ramp(draw, 0, 0.5))} transform="rotate(-90)" />
 			<circle r={R * 0.88} fill="none" stroke={C.gold} strokeOpacity={0.6} strokeWidth={size * 0.003} strokeDasharray="2 6" transform={`rotate(${frame * 0.2})`} opacity={ramp(draw, 0.3, 0.7)} />
-			{[0, 45].map((rot, i) => (
-				<rect key={i} x={-sq(0.5) / 2} y={-sq(0.5) / 2} width={sq(0.5)} height={sq(0.5)} fill={i ? 'rgba(217,180,106,0.08)' : 'none'} stroke={C.gold} strokeWidth={size * 0.008} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - ramp(draw, 0.15 + i * 0.1, 0.65 + i * 0.1)} transform={`rotate(${rot + frame * 0.05})`} />
-			))}
-			{[0, 45].map((rot, i) => (
-				<rect key={`s${i}`} x={-sq(0.26) / 2} y={-sq(0.26) / 2} width={sq(0.26)} height={sq(0.26)} fill="none" stroke="#F3DDA6" strokeWidth={size * 0.005} opacity={ramp(draw, 0.5, 0.9)} transform={`rotate(${rot - frame * 0.08})`} />
-			))}
-			{Array.from({length: 16}, (_, i) => {
-				const a = (i / 16) * Math.PI * 2;
-				const d = ramp(draw, 0.55 + (i % 4) * 0.05, 0.95);
-				return <line key={i} x1={Math.cos(a) * R * 0.62} y1={Math.sin(a) * R * 0.62} x2={Math.cos(a) * R * (0.62 + 0.18 * d)} y2={Math.sin(a) * R * (0.62 + 0.18 * d)} stroke={C.gold} strokeOpacity={0.7} strokeWidth={size * 0.004} />;
+			{Array.from({length: 48}, (_, i) => {
+				const a = (i / 48) * Math.PI * 2;
+				const long = i % 4 === 0;
+				const r0 = R * 0.7;
+				const r1 = R * (long ? 0.78 : 0.74);
+				return <line key={i} x1={Math.cos(a) * r0} y1={Math.sin(a) * r0} x2={Math.cos(a) * r1} y2={Math.sin(a) * r1} stroke={C.gold} strokeOpacity={long ? 0.8 : 0.45} strokeWidth={size * (long ? 0.005 : 0.003)} opacity={ramp(draw, 0.35 + (i % 12) * 0.02, 0.8)} />;
 			})}
-			<circle r={R * 0.07 * ramp(draw, 0, 0.3)} fill="#F3DDA6" style={{filter: `drop-shadow(0 0 ${R * 0.1}px ${C.gold})`}} />
+			<circle r={R * 0.62} fill="none" stroke={C.gold} strokeOpacity={0.7} strokeWidth={size * 0.004} {...dash(ramp(draw, 0.15, 0.6))} transform="rotate(90)" />
+			{/* globe */}
+			<circle r={g} fill="rgba(217,180,106,0.07)" stroke="#F3DDA6" strokeWidth={size * 0.007} {...dash(ramp(draw, 0.2, 0.65))} transform="rotate(-90)" />
+			<g transform={`rotate(${-18})`} fill="none" stroke="#F3DDA6" strokeWidth={size * 0.004} opacity={ramp(draw, 0.45, 0.9)}>
+				{[0.25, 0.62].map((k, i) => {
+					const phase = Math.sin(frame / 40 + i);
+					return <ellipse key={`m${i}`} rx={g * k * (0.85 + 0.15 * phase)} ry={g} strokeOpacity={0.75} />;
+				})}
+				<line x1={0} y1={-g} x2={0} y2={g} strokeOpacity={0.75} />
+				<line x1={-g} y1={0} x2={g} y2={0} strokeOpacity={0.75} />
+				{[-0.5, 0.5].map((k, i) => {
+					const y = g * k;
+					const w = Math.sqrt(g * g - y * y);
+					return <line key={`p${i}`} x1={-w} y1={y} x2={w} y2={y} strokeOpacity={0.6} />;
+				})}
+			</g>
 		</svg>
 	);
 };
@@ -331,9 +344,6 @@ export const ArSeal: React.FC<{size: number; frame: number}> = ({size, frame}) =
 			<circle cx={70} cy={70} r={66} fill="rgba(217,180,106,0.08)" stroke={C.gold} strokeWidth={1.8} />
 			<circle cx={70} cy={70} r={60} fill="none" stroke={C.gold} strokeWidth={0.7} strokeDasharray="1.5 2.5" transform={`rotate(${frame * 0.4} 70 70)`} />
 			<circle cx={70} cy={70} r={44} fill="none" stroke={C.gold} strokeWidth={1} />
-			<g transform="translate(70 70)" fill="none" stroke={C.gold} strokeWidth={1}>
-				<rect x={-30} y={-30} width={60} height={60} transform="rotate(45)" strokeOpacity={0.5} />
-			</g>
 		</svg>
 		<div dir="rtl" style={{position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', fontFamily: AF.display, fontWeight: 800, color: C.gold, lineHeight: 1.1}}>
 			<div style={{fontSize: size * 0.2}}>مُصدَّقة</div>
@@ -364,7 +374,7 @@ export const ArDoc: React.FC<ArDocState & {frame: number}> = ({frame, variant = 
 			</svg>
 			{/* header */}
 			<div style={{position: 'absolute', right: 40, top: 38, display: 'flex', alignItems: 'center', gap: 18, opacity: content(0)}}>
-				<Emblem size={62} frame={frame} />
+				<Ornament size={62} draw={1} frame={frame} glow={0.3} />
 				<div>
 					<div style={{fontFamily: AF.display, fontWeight: 800, fontSize: 40, color: C.white, lineHeight: 1.15}}>{coo ? 'شهادة المنشأ' : 'فاتورة تجارية'}</div>
 					<div style={{...lbl, fontSize: 18, marginTop: 4}}>{coo ? 'جمهورية العراق · نموذج تصديق' : 'مستند تجاري مرفق'}</div>
