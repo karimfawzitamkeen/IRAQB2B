@@ -2,18 +2,17 @@ import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {C, expoInOut, expoOut, kf, lerp, ramp, smooth} from '../../theme';
 import {DocPlace} from '../../components/Document';
-import {ArDoc, ArIcon, ArText, GoldRule, Ornament, Win, useLand} from '../kit';
+import {ArDoc, ArIcon, ArText, GoldRule, MinistryLogo, Win, useLand} from '../kit';
 import {AF, TXT} from '../theme';
 
 /** Opening (0–780f): patronage → launch title → beneficiary → executing entity & partnership. */
 /** Layout per format: portrait 1080×1920 / landscape 1920×1080. */
-const LP = {cx: 540, lineW: 1040, lineY: 540, orn: {y: 540, size: 380}, patronTop: 800, ruleTop: 1100, nameTop: 1120, launch: {top: 210, left: undefined as number | undefined, width: undefined as number | undefined}, doc: {x: 540, y: 1150, s: 0.8}, benTop: 440, exeTop: 300, rings: {y: 1330, r: 150, spread: [260, 95]}};
-const LL = {cx: 960, lineW: 1600, lineY: 540, orn: {y: 250, size: 300}, patronTop: 420, ruleTop: 715, nameTop: 730, launch: {top: 250, left: 960, width: 880}, doc: {x: 520, y: 540, s: 0.94}, benTop: 150, exeTop: 110, rings: {y: 900, r: 105, spread: [200, 66]}};
+const LP = {cx: 540, lineW: 1040, lineY: 540, orn: {y: 530, size: 360}, patronTop: 800, ruleTop: 1100, nameTop: 1120, launch: {top: 210, left: undefined as number | undefined, width: undefined as number | undefined}, doc: {x: 540, y: 1150, s: 0.8}, benTop: 440, exeTop: 300, rings: {y: 1330, r: 150, spread: [260, 95]}};
+const LL = {cx: 960, lineW: 1600, lineY: 540, orn: {y: 240, size: 290}, patronTop: 420, ruleTop: 715, nameTop: 730, launch: {top: 250, left: 960, width: 880}, doc: {x: 520, y: 540, s: 0.94}, benTop: 150, exeTop: 110, rings: {y: 900, r: 105, spread: [200, 66]}};
 
 export const A1Opening: React.FC<{frame: number}> = ({frame: f}) => {
 	const L = useLand() ? LL : LP;
 	if (f > 790) return null;
-	const orn = ramp(f, 14, 80, 0, 1, (t) => t);
 	const ornOut = ramp(f, 232, 256, 0, 1, expoInOut);
 	const sweep = ramp(f, 4, 34, 0, 1, expoOut);
 	// launch: the certificate materialises under the title
@@ -29,8 +28,7 @@ export const A1Opening: React.FC<{frame: number}> = ({frame: f}) => {
 			{/* patronage */}
 			{f < 260 ? (
 				<div style={{position: 'absolute', left: L.cx - L.orn.size / 2, top: L.orn.y - L.orn.size / 2, opacity: 1 - ornOut, transform: `scale(${1 + ornOut * 0.4})`}}>
-					<div style={{position: 'absolute', inset: -120, borderRadius: '50%', background: 'radial-gradient(circle, rgba(217,180,106,0.16), rgba(217,180,106,0) 65%)'}} />
-					<Ornament size={L.orn.size} draw={orn} frame={f} />
+					<MinistryLogo size={L.orn.size} p={ramp(f, 16, 60, 0, 1, expoOut)} frame={f} sweep={ramp(f, 70, 110, -0.3, 1.3)} />
 				</div>
 			) : null}
 			<Win frame={f} a={50} b={250} top={L.patronTop} outF={16}>

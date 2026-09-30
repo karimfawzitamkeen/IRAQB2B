@@ -1,4 +1,5 @@
 import React, {createContext, useContext} from 'react';
+import {Img, staticFile} from 'remotion';
 import {C, F, expoOut, ramp, scramble, smooth} from '../theme';
 import {DOC_H, DOC_W, QRCode, SERIAL, SIGNATURE_D} from '../components/Document';
 import {AF, ASAFE, STEPS} from './theme';
@@ -127,6 +128,26 @@ export const Ornament: React.FC<{size: number; draw: number; frame: number; glow
 				})}
 			</g>
 		</svg>
+	);
+};
+
+// ---------------------------------------------------------------------------
+// Official Ministry of Trade logo (supplied by the client). Shown calmly: fade + slight scale,
+// one soft light sweep, a thin gold ring — never spun, distorted or recoloured.
+// ---------------------------------------------------------------------------
+export const MinistryLogo: React.FC<{size: number; p: number; frame: number; sweep?: number}> = ({size, p, frame, sweep = -1}) => {
+	const ring = size * 1.1;
+	return (
+		<div style={{position: 'relative', width: size, height: size, opacity: Math.min(1, p * 1.4), transform: `scale(${0.9 + 0.1 * p})`}}>
+			<div style={{position: 'absolute', inset: -size * 0.35, borderRadius: '50%', background: 'radial-gradient(circle, rgba(217,180,106,0.22), rgba(217,180,106,0) 65%)'}} />
+			<svg width={ring} height={ring} viewBox="-50 -50 100 100" style={{position: 'absolute', left: (size - ring) / 2, top: (size - ring) / 2, overflow: 'visible'}}>
+				<circle r={49} fill="none" stroke={C.gold} strokeWidth={0.8} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - ramp(p, 0.2, 1)} transform="rotate(-90)" style={{filter: 'drop-shadow(0 0 3px rgba(217,180,106,0.8))'}} />
+			</svg>
+			<div style={{position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(217,180,106,0.25)'}}>
+				<Img src={staticFile('coo-ar/ministry-of-trade-logo.png')} style={{width: '100%', height: '100%', display: 'block', clipPath: 'circle(49.5% at 50% 50%)'}} />
+				{sweep > -0.3 && sweep < 1.3 ? <div style={{position: 'absolute', inset: 0, background: `linear-gradient(115deg, rgba(255,255,255,0) ${sweep * 100 - 16}%, rgba(255,255,255,0.28) ${sweep * 100}%, rgba(255,255,255,0) ${sweep * 100 + 16}%)`}} /> : null}
+			</div>
+		</div>
 	);
 };
 

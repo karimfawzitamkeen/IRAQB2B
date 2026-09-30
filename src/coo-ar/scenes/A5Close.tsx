@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {C, expoOut, ramp} from '../../theme';
-import {ArText, GoldRule, Ornament, useLand} from '../kit';
+import {ArText, GoldRule, MinistryLogo, useLand} from '../kit';
 import {AF, AT, TXT} from '../theme';
 
 /** Closing slate (3060–3360f): platform title, message, patronage and credits — held to the fade. */
@@ -19,7 +19,7 @@ export const A5Close: React.FC<{frame: number}> = ({frame: f}) => {
 	return (
 		<AbsoluteFill style={{opacity: o}}>
 			<div style={{position: 'absolute', left: K.orn.left, top: K.orn.top}}>
-				<Ornament size={240} draw={ramp(f, a, a + 46)} frame={f} glow={0.8} />
+				<MinistryLogo size={240} p={ramp(f, a, a + 30, 0, 1, expoOut)} frame={f} sweep={ramp(f, a + 30, a + 70, -0.3, 1.3)} />
 			</div>
 			<div style={col(K.title)}>
 				<ArText lines={TXT.launch2} frame={f} start={a + 8} size={112} weight={900} maxW={mw} />

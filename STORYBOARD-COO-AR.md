@@ -53,7 +53,8 @@ after the Accountant confirms payment.
   about 40 px, and statements are 100–150 px, for reading at about 4 m.
 - Type: Amiri (formal naskh) for the patronage and names, Cairo for headings, IBM Plex Sans
   Arabic for body lines. Step numbers use Arabic-Indic digits.
-- The ornament is a neutral medallion: rings, fine ticks and a globe with meridians. It deliberately avoids star and overlapping-square motifs, and imitates no official state emblem or logo.
+- **The official Ministry of Trade logo** (supplied by the client, `public/coo-ar/ministry-of-trade-logo.png`) opens the film above the patronage and heads the closing slate. It is shown calmly: fade, slight scale, one light sweep and a thin gold ring, and is never spun, distorted or recoloured. It is not placed on the illustrative certificate.
+- The benefits title card and the certificate header use a neutral medallion: rings, fine ticks and a globe with meridians. It deliberately avoids star and overlapping-square motifs, and imitates no official state emblem or logo.
 ## Music
 The score is original, synthesised by `scripts/coo-ar-score.py` into `public/coo-ar/score.wav`
 (48 kHz stereo). It uses no samples or third-party music, so there are no licensing issues.
