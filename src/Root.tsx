@@ -7,6 +7,8 @@ import {FilmDOOH} from './dooh/FilmDOOH';
 import {FilmTP} from './tradepoint/FilmTP';
 import {FilmAR} from './coo-ar/FilmAR';
 import * as AR from './coo-ar/theme';
+import {FilmStory} from './coo-story/FilmStory';
+import * as ST from './coo-story/theme';
 import * as TP from './tradepoint/theme';
 import {TDUR, TH, TW} from './dooh/theme';
 import {SLA_DUR, SLA_H, SLA_W} from './sla/theme';
@@ -25,6 +27,10 @@ export const RemotionRoot: React.FC = () => (
 		<Composition id="CertificateOfOriginAR9x16" component={FilmAR} durationInFrames={AR.ADUR} fps={FPS} width={AR.AW} height={AR.AH} />
 		{/* same film, 16:9 ceremony-screen master (1920×1080) */}
 		<Composition id="CertificateOfOriginAR16x9" component={FilmAR} durationInFrames={AR.ADUR} fps={FPS} width={AR.ALW} height={AR.ALH} defaultProps={{landscape: true}} />
+		{/* «من رحلة طويلة إلى خدمة رقمية» — narrative launch film for the electronic CoO attestation service, 118 s, 16:9 */}
+		<Composition id="CooStory16x9" component={FilmStory} durationInFrames={ST.SDUR} fps={FPS} width={ST.SW} height={ST.SH} />
+		{/* same film with the voice-over burned in as captions, for review and narrator timing */}
+		<Composition id="CooStory16x9Captions" component={FilmStory} durationInFrames={ST.SDUR} fps={FPS} width={ST.SW} height={ST.SH} defaultProps={{captions: true}} />
 		{/* TRADPOINT · Iraq Trade Ecosystem — 30 s commercial (25 s film + TAMKEEN contact end card) for the same 1080×1920 display */}
 		<Composition id="TradePoint9x16" component={FilmTP} durationInFrames={TP.PDUR} fps={FPS} width={TP.PW} height={TP.PH} />
 		{/* Original landscape version — 1920×1080, 16:9 */}

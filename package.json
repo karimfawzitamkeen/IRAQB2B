@@ -2,7 +2,7 @@
   "name": "tamkeen-coo-video",
   "version": "1.0.0",
   "private": true,
-  "description": "Digital Certificate of Origin Attestation \u2014 25s motion graphics film (Remotion)",
+  "description": "Digital Certificate of Origin Attestation — 25s motion graphics film (Remotion)",
   "scripts": {
     "studio": "remotion studio",
     "render": "remotion render CertificateOfOrigin9x16 out/certificate-of-origin-9x16-screen.mp4 --image-format=png",
@@ -12,7 +12,9 @@
     "render:dooh": "remotion render TamkeenDOOH9x16 out/tamkeen-dooh-9x16.mp4 --image-format=png",
     "render:tp": "remotion render TradePoint9x16 out/tradepoint-9x16.mp4 --image-format=png",
     "render:ar": "remotion render CertificateOfOriginAR9x16 out/certificate-of-origin-ar-9x16.mp4 --image-format=png",
-    "render:ar16": "remotion render CertificateOfOriginAR16x9 out/certificate-of-origin-ar-16x9.mp4 --image-format=png"
+    "render:ar16": "remotion render CertificateOfOriginAR16x9 out/certificate-of-origin-ar-16x9.mp4 --image-format=png",
+    "render:story": "remotion render CooStory16x9 out/coo-story-16x9.mp4 --image-format=png",
+    "render:story-captions": "remotion render CooStory16x9Captions out/coo-story-16x9-captions.mp4 --image-format=png"
   },
   "dependencies": {
     "@fontsource/amiri": "^5.3.0",
