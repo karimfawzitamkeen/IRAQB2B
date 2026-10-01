@@ -125,7 +125,7 @@ const SHOTS = [ShotRoute, ShotLight, ShotTrack, ShotPaper, ShotVerify];
 const Gains: React.FC<{f: number}> = ({f}) => {
 	const [a, b] = ST.gains;
 	if (f < a - 4 || f > b + 6) return null;
-	const i = Math.min(4, Math.floor((f - a) / SHOT));
+	const i = Math.max(0, Math.min(4, Math.floor((f - a) / SHOT)));
 	const s = a + i * SHOT;
 	const Shot = SHOTS[i];
 	const o = ramp(f, s, s + 8) * (1 - ramp(f, s + SHOT - 8, s + SHOT));
