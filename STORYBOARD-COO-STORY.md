@@ -47,15 +47,26 @@ transaction travels, not the trader.
 ## Official texts used (exactly as supplied with this script)
 - برعاية معالي وزير التجارة الدكتور مصطفى العاني
 - إطلاق الخدمة الإلكترونية لتصديق شهادة المنشأ
-- الجهة المستفيدة: دائرة العلاقات التجارية — وزارة التجارة
+- الجهة المستفيدة: دائرة العلاقات الاقتصادية الخارجية — وزارة التجارة
 - الجهة المنفذة: الشركة العامة للمعارض والخدمات التجارية
 - بالشراكة مع: تحالف السهد / التمكين
 
 ## Voice-over
-The voice-over is the script's text, timed per scene in `VO` (`src/coo-story/theme.ts`). After
-the narration is recorded to `out/coo-story-vo.srt`, take these steps:
-1. Place the file at `public/coo-story/vo.wav` (48 kHz, starting at 0:00).
-2. Render with `--props='{"vo":true}'`.
+The voice-over is the script's text, timed per scene in `VO` (`src/coo-story/theme.ts`) for a
+narrator reading at about 2.3–2.5 words a second. In all, 215 words take about 93 s of speech.
+`python3 scripts/coo-story-vo.py` writes the narrator pack:
+- `out/coo-story-vo.srt`: the timed cues, for recording to picture;
+- `out/coo-story-vo-narrator.txt`: every line fully diacritised for formal pronunciation, with
+  in and out times and word counts.
+
+After recording:
+1. Place the take at `public/coo-story/vo.wav` (48 kHz, starting at 0:00).
+2. Render with `--props='{"vo":true}'`. The score then ducks to 45 % under each cue.
+
+`scripts/coo-story-vo-tts.py` can make a synthetic guide track from any Piper-format Arabic voice,
+for timing review. The open Arabic voices checked so far are either too slow for these cues or
+licensed non-commercial only (CC BY-NC-SA 4.0). The ceremony track should therefore be a human
+narrator or a commercially licensed TTS.
 
 ## Music
 The score is original, synthesised by `scripts/coo-story-score.py` into

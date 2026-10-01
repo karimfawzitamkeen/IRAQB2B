@@ -9,13 +9,20 @@ import {Globe} from '../components/Globe';
 import {AR_FONT_FACES} from '../coo-ar/fonts';
 import {LandCtx} from '../coo-ar/kit';
 import {Captions, storyCam} from './parts';
-import {SDUR, SH, SSAFE, SW} from './theme';
+import {SDUR, SH, SSAFE, SW, VO} from './theme';
 import {SWorld, SMeaning} from './scenes/SWorld';
 import {SOld} from './scenes/SOld';
 import {SPlatform} from './scenes/SPlatform';
 import {STravel} from './scenes/STravel';
 import {SCert} from './scenes/SCert';
 import {SClose} from './scenes/SClose';
+
+/** Score level under the narration: dips to 45 % during each cue, with short ramps. */
+const duck = (f: number) => {
+	let d = 0;
+	for (const c of VO) d = Math.max(d, ramp(f, c.a - 10, c.a) * (1 - ramp(f, c.b, c.b + 14)));
+	return 1 - 0.55 * d;
+};
 
 /**
  * «من رحلة طويلة إلى خدمة رقمية» (STORYBOARD-COO-STORY.md), 1920×1080, 118 s.
@@ -34,11 +41,11 @@ export const FilmStory: React.FC<{captions?: boolean; vo?: boolean; guides?: boo
 	const fadeIn = ramp(frame, 0, 12);
 	const fadeOut = ramp(frame, SDUR - 10, SDUR - 1, 0, 1, (t) => t * t);
 	// the launch slate sits on near-black
-	const dark = ramp(frame, 3230, 3262) ;
+	const dark = ramp(frame, 3230, 3262);
 	return (
 		<LandCtx.Provider value>
 			<AbsoluteFill style={{background: C.black, overflow: 'hidden'}}>
-				<Audio src={staticFile('coo-story/score.wav')} />
+				<Audio src={staticFile('coo-story/score.wav')} volume={(f) => (vo ? duck(f) : 1)} />
 				{vo ? <Audio src={staticFile('coo-story/vo.wav')} /> : null}
 				<Background frame={frame} w={SW} h={SH} />
 				<AbsoluteFill style={{background: '#000', opacity: dark * 0.55}} />
